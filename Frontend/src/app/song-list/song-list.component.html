@@ -1,0 +1,11 @@
+<div class="song-list">
+    <app-song-card 
+        *ngFor="let song of musicFiles" 
+        [song]="song" 
+        (playSong)="playMusic(song)">
+    </app-song-card>
+</div>
+<div *ngIf="currentTrack">
+    <h2>Now Playing: {{ currentTrack.fileName }}</h2>
+    <audio controls [src]="musicService.streamFile(currentTrack.fileName)"></audio>
+</div>
