@@ -31,7 +31,7 @@ namespace backend.services
 
 				return new Song
 				{
-					FileName = track.Title,
+					FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
 					CreationDate = fileInfo.CreationTime,
 					Album = track.Album != "" ? track.Album : null,
 					Rating = 0,     // TODO: !!!
@@ -39,6 +39,8 @@ namespace backend.services
 				};
 			});
 		}
+
+		// test getting all songs and searching for their name. be creative. lots of ASCII symbols
 
 		public IActionResult StreamSongTest(string fileName)
 		{
