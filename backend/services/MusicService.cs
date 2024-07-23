@@ -11,17 +11,19 @@ namespace backend.services
 		{
 			var songs = Directory.GetFiles(_musicPath);
 
+
 			return songs.Select(song =>
 			{
-				var track = new Track(song);
+				Track track = new(song);
+				FileInfo fileInfo = new(song);
 
 				return new Song
 				{
-					FileName = Path.GetFileName(song),
-					CreationDate = track.Date != DateTime.MinValue ? track.Date : null,
-					Album = track.Album,
-					Duration = TimeSpan.FromSeconds(track.Duration),
-					Artist = track.Artist
+					FileName = fileInfo.Name,
+					CreationDate = fileInfo.CreationTimeUtc,
+					Album = track.Album != "" ? track.Album : null,
+					Rating = 0,     // TODO: !!!
+					Artist = track.Artist != "" ? track.Artist : null
 				};
 			});
 		}

@@ -6,7 +6,7 @@ namespace backend.models
 		public required string FileName { get; set; }
 		public DateTime? CreationDate { get; set; }
 		public string? Album { get; set; }
-		public TimeSpan Duration { get; set; }
+		public int Rating { get; set; }
 		public string? Artist { get; set; }
 	}
 }
