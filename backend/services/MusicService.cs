@@ -18,10 +18,10 @@ namespace backend.services
 				return new Song
 				{
 					FileName = Path.GetFileName(song),
-					CreationDate = track.Date ?? DateTime.Now,
+					CreationDate = track.Date != DateTime.MinValue ? track.Date : null,
 					Album = track.Album,
-					// Rating = track.Rating,
-					Author = track.Artist
+					Duration = TimeSpan.FromSeconds(track.Duration),
+					Artist = track.Artist
 				};
 			});
 		}
