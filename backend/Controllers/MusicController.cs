@@ -15,5 +15,10 @@ namespace backend.controllers
 
 			return Ok(songs);
 		}
+
+		[HttpGet("stream/{fileName}")]
+		public IActionResult StreamSongTest(string fileName) {
+			return _musicService.StreamSongTest(fileName);
+		}
 	}
 }

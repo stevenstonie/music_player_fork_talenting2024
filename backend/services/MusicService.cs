@@ -1,5 +1,6 @@
 using ATL;
 using backend.models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend.services
 {
@@ -9,8 +10,7 @@ namespace backend.services
 
 		public IEnumerable<Song> GetSongs()
 		{
-			var songs = Directory.GetFiles(_musicPath);
-
+			string[] songs = Directory.GetFiles(_musicPath);
 
 			return songs.Select(song =>
 			{
@@ -26,6 +26,18 @@ namespace backend.services
 					Artist = track.Artist != "" ? track.Artist : null
 				};
 			});
+		}
+
+		// TODO: check if the path exists in all cases
+
+		public IActionResult StreamSongTest(string fileName)
+		{
+			FileStream stream = new($"{_musicPath}/{fileName}", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+
+			return new FileStreamResult(stream, "audio/mp3")
+			{
+				EnableRangeProcessing = true
+			};
 		}
 	}
 }
