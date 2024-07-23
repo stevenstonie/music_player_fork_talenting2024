@@ -11,9 +11,7 @@ namespace backend.controllers
 
 		[HttpGet("list")]
 		public ActionResult<IEnumerable<Song>> GetSongs() {
-			var songs = _musicService.GetSongs();
-
-			return Ok(songs);
+			return Ok(_musicService.GetSongs());
 		}
 
 		[HttpGet("stream/{fileName}")]
