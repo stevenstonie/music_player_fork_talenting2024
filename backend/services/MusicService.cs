@@ -7,6 +7,7 @@ namespace backend.services
 	public class MusicService
 	{
 		private readonly string _musicPath;
+		private readonly string extension = "mp3";
 
 		public MusicService(string musicPath)
 		{
@@ -23,7 +24,7 @@ namespace backend.services
 			string[] songs = Directory.GetFiles(_musicPath);
 
 			return songs
-			.Where(song => Path.GetExtension(song).ToLower().Equals(".mp3", comparisonType: StringComparison.OrdinalIgnoreCase))
+			.Where(song => Path.GetExtension(song).ToLower().Equals($".{extension}", comparisonType: StringComparison.OrdinalIgnoreCase))
 			.Select(song =>
 			{
 				Track track = new(song);
@@ -32,6 +33,7 @@ namespace backend.services
 				return new Song
 				{
 					FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
+					Title = track.Title,
 					CreationDate = fileInfo.CreationTime,
 					Album = track.Album != "" ? track.Album : null,
 					Rating = 0,     // TODO: !!!
@@ -47,14 +49,14 @@ namespace backend.services
 			FileStream stream;
 			try
 			{
-				stream = new($"{_musicPath}/{fileName}.mp3", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+				stream = new($"{_musicPath}/{fileName}.{extension}", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
 			}
 			catch (FileNotFoundException)
 			{
 				return new NotFoundResult();
 			}
 
-			return new FileStreamResult(stream, "audio/mp3")
+			return new FileStreamResult(stream, $"audio/{extension}")
 			{
 				EnableRangeProcessing = true
 			};

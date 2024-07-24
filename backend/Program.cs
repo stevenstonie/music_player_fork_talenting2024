@@ -1,4 +1,8 @@
 
+using System.Net;
+using System.Text.Json;
+using backend.exceptions;
+using backend.payloads;
 using backend.services;
 
 namespace backend
@@ -15,6 +19,8 @@ namespace backend
 			builder.Services.AddSwaggerGen();
 
 			var app = builder.Build();
+
+			app.UseMiddleware<GlobalExceptionHandler>();
 
 			if (app.Environment.IsDevelopment())
 			{
