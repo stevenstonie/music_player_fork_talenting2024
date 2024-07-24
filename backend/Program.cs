@@ -7,26 +7,19 @@ namespace backend
 	{
 		public static void Main(string[] args)
 		{
-			var builder = WebApplication.CreateBuilder(args);
+			WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-			builder.Services.AddCors(options =>
-				{
-					options.AddPolicy("AllowSpecificOrigin",
-					policy =>
-					{
-						policy.WithOrigins("http://localhost:4200")
-							.AllowAnyHeader()
-							.AllowAnyMethod();
-					});
-				});
-			builder.Services.AddControllers();
+			ConfigureServices(builder);
 
-			builder.Services.AddTransient<MusicService>(provider => new MusicService("./../music"));
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+			WebApplication app = builder.Build();
 
-			var app = builder.Build();
+			ConfigurePipelines(app);
 
+			app.Run();
+		}
+
+		private static void ConfigurePipelines(WebApplication app)
+		{
 			app.UseCors("AllowSpecificOrigin");
 
 			app.UseMiddleware<GlobalExceptionHandler>();
@@ -43,8 +36,26 @@ namespace backend
 
 
 			app.MapControllers();
+		}
 
-			app.Run();
+		private static void ConfigureServices(WebApplicationBuilder builder)
+		{
+			builder.Services.AddCors(options =>
+				{
+					options.AddPolicy("AllowSpecificOrigin",
+					policy =>
+					{
+						policy.WithOrigins("http://localhost:4200")
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					});
+				});
+
+			builder.Services.AddControllers();
+			builder.Services.AddTransient<MusicService>(provider => new MusicService("./../music"));
+
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
 		}
 	}
 }

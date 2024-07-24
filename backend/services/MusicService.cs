@@ -8,7 +8,7 @@ namespace backend.services
 	public class MusicService
 	{
 		private readonly string _musicPath;
-		private readonly string extension = "mp3";
+		private readonly string extension = "MP3";
 
 		public MusicService(string musicPath)
 		{
@@ -22,28 +22,28 @@ namespace backend.services
 
 		public IEnumerable<Song> GetSongs()
 		{
-			string[] songs = Directory.GetFiles(_musicPath);
+			string[] files = Directory.GetFiles(_musicPath);
 
-			return songs
-			.Where(song => Path.GetExtension(song).ToLower().Equals($".{extension}", comparisonType: StringComparison.OrdinalIgnoreCase))
-			.Select(song =>
-			{
-				Track track = new(song);
-				FileInfo fileInfo = new(song);
-
-				return new Song
+			return files
+				.Where(file => Path.GetExtension(file).Equals($".{extension}", comparisonType: StringComparison.OrdinalIgnoreCase))
+				.Select(song =>
 				{
-					FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
-					Title = track.Title,
-					CreationDate = fileInfo.CreationTime,
-					Album = track.Album != "" ? track.Album : null,
-					Rating = 0,     // TODO: !!!
-					Artist = track.Artist != "" ? track.Artist : null
-				};
-			});
+					Track track = new(song);
+					FileInfo fileInfo = new(song);
+
+					return new Song
+					{
+						FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
+						Title = track.Title,
+						CreationDate = fileInfo.CreationTime,
+						Album = track.Album != "" ? track.Album : null,
+						Rating = 0,     // TODO: !!!
+						Artist = track.Artist != "" ? track.Artist : null
+					};
+				});
 		}
 
-		// test getting all songs and searching for their name. be creative. lots of ASCII symbols
+		// test getting all songs and searching for their name. be creative. lots of ASCII symbols and stuff.
 
 		public IActionResult StreamSong(string fileName)
 		{

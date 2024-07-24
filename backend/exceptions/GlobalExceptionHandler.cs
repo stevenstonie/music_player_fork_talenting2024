@@ -29,20 +29,12 @@ namespace backend.exceptions
 			{
 				case ResourceNotFoundCustomException:
 					{
-						result = new ResponsePayload
-						{
-							Status = (int)HttpStatusCode.NotFound,
-							Message = exception.Message
-						};
+						result = new((int)HttpStatusCode.NotFound, exception.Message);
 						break;
 					}
 				default:
 					{
-						result = new ResponsePayload
-						{
-							Status = (int)HttpStatusCode.InternalServerError,
-							Message = exception.Message
-						};
+						result = new((int)HttpStatusCode.InternalServerError, exception.Message);
 						break;
 					}
 			}

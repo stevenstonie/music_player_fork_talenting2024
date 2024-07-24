@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { API_ENDPOINT_BASE_PATH } from '../app.config';
 
 @Injectable({
@@ -23,6 +23,7 @@ export class MusicService {
   streamSong(fileName: string): Observable<Blob> {
     return this.http.get(`${API_ENDPOINT_BASE_PATH}/${this._musicUrl}/stream/${fileName}`, { responseType: 'blob' })
       .pipe(
+        // manage edge case for error being an instance of Blob
         catchError(this.handleError)
       );
   }
@@ -31,6 +32,6 @@ export class MusicService {
 
   private handleError(error: HttpErrorResponse) {
     console.error(error);
-    return of();
+    return throwError(() => new Error());
   }
 }

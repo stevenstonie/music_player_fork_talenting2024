@@ -7,7 +7,6 @@ namespace backend.controllers
 {
 	[Route("api/music")]
 	[ApiController]
-	[EnableCors("AllowSpecificOrigin")]
 	public class MusicController (MusicService musicService) : ControllerBase {
 		private readonly MusicService _musicService = musicService;
 

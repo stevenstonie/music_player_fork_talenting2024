@@ -14,12 +14,16 @@ export class TestStreamSongComponent {
   songUrl: SafeUrl | null = null;
 
   constructor(private musicService: MusicService, private sanitizer: DomSanitizer) { }
-  
-  streamSong() {
-    this.musicService.streamSong('real - kendrick lamar').subscribe(response => {
-      this.songUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
 
-      console.log(response);
+  streamSong() {
+    this.musicService.streamSong('hardcoded song name!!!!!!!!!').subscribe({
+      next: response => {
+        this.songUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(response));
+
+        console.log(response);
+      },
+      error: error => {
+      }
     });
   }
 }
