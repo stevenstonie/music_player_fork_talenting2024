@@ -1,13 +1,9 @@
-
-using System.Net;
-using System.Text.Json;
 using backend.exceptions;
-using backend.payloads;
 using backend.services;
 
 namespace backend
 {
-	public class Program
+	public static class Program
 	{
 		public static void Main(string[] args)
 		{

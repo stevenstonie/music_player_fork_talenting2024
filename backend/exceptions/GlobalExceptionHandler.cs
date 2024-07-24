@@ -1,7 +1,7 @@
 
 using System.Net;
 using System.Text.Json;
-using backend.payloads;
+using backend.models;
 
 namespace backend.exceptions
 {
@@ -31,8 +31,8 @@ namespace backend.exceptions
 					{
 						result = new ResponsePayload
 						{
-							StatusCode = (int)HttpStatusCode.NotFound,
-							Description = exception.Message
+							Status = (int)HttpStatusCode.NotFound,
+							Message = exception.Message
 						};
 						break;
 					}
@@ -40,8 +40,8 @@ namespace backend.exceptions
 					{
 						result = new ResponsePayload
 						{
-							StatusCode = (int)HttpStatusCode.InternalServerError,
-							Description = exception.Message
+							Status = (int)HttpStatusCode.InternalServerError,
+							Message = exception.Message
 						};
 						break;
 					}
@@ -49,7 +49,7 @@ namespace backend.exceptions
 
 			var response = context.Response;
 			response.ContentType = "application/json";
-			response.StatusCode = result.StatusCode;
+			response.StatusCode = result.Status;
 
 			return response.WriteAsync(JsonSerializer.Serialize(result));
 		}
