@@ -7,7 +7,7 @@ import { SongListComponent } from './song-list/song-list.component';
   standalone: true,
   imports: [RouterOutlet, SongListComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Frontend';

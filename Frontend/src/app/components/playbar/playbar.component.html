@@ -1,0 +1,54 @@
+<div class="playbar-container">
+  <div class="playbar-song-info">
+    <img
+      class="playbar-song-info_img"
+      src="https://i.scdn.co/image/ab67616d0000b27351700837cdbc6adddb88560a"
+      alt="song image"
+    />
+
+    <div class="playbar-song-info_text">
+      <p class="playbar-song-info_text_title">Chk Chk Boom</p>
+      <p class="playbar-song-info_text_artist">Stray Kids</p>
+    </div>
+
+    <div class="playbar-song-info_favorite">
+      <mat-icon fontIcon="favorite_outline" />
+    </div>
+    <!-- daca e favorit sa fie fill -->
+    <!-- <div class="playbar-song-info_favorite">
+      <mat-icon  fontIcon="favorite"></mat-icon>
+    </div> -->
+  </div>
+
+  <div class="playbar-main">
+    <div class="playbar-progress">
+      <mat-slider
+        min="0"
+        [max]="songDurationInSeconds"
+        step="1"
+        discrete
+        [displayWith]="formatLabel"
+      >
+        <input matSliderThumb />
+      </mat-slider>
+
+      <p class="playbar-progress_time">3:14</p>
+    </div>
+
+    <div class="playbar-controls_buttons">
+      <button
+        class="playbar-controls_buttons_previous no_hover_effect"
+        mat-icon-button
+      >
+        <mat-icon fontIcon="skip_previous"></mat-icon>
+      </button>
+      <button class="playbar-controls_buttons_play-stop" mat-icon-button>
+        <!-- <mat-icon fontIcon="pause"></mat-icon> -->
+        <mat-icon fontIcon="play_arrow"></mat-icon>
+      </button>
+      <button class="playbar-controls_buttons_next" mat-icon-button>
+        <mat-icon fontIcon="skip_next"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
