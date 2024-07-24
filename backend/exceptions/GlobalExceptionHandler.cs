@@ -27,11 +27,11 @@ namespace backend.exceptions
 
 			switch (exception)
 			{
-				case NotImplementedException:
+				case ResourceNotFoundCustomException:
 					{
 						result = new ResponsePayload
 						{
-							StatusCode = (int)HttpStatusCode.NotImplemented,
+							StatusCode = (int)HttpStatusCode.NotFound,
 							Description = exception.Message
 						};
 						break;

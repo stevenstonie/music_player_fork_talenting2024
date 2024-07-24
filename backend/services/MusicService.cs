@@ -1,4 +1,5 @@
 using ATL;
+using backend.exceptions;
 using backend.models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,17 +45,17 @@ namespace backend.services
 
 		// test getting all songs and searching for their name. be creative. lots of ASCII symbols
 
-		public IActionResult StreamSongTest(string fileName)
+		public IActionResult StreamSong(string fileName)
 		{
+			string songPath = $"{_musicPath}/{fileName}.{extension}";
+
+			if (!File.Exists(songPath))
+			{
+				throw new ResourceNotFoundCustomException("Song not found.");
+			}
+
 			FileStream stream;
-			try
-			{
-				stream = new($"{_musicPath}/{fileName}.{extension}", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
-			}
-			catch (FileNotFoundException)
-			{
-				return new NotFoundResult();
-			}
+			stream = new($"{_musicPath}/{fileName}.{extension}", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
 
 			return new FileStreamResult(stream, $"audio/{extension}")
 			{
