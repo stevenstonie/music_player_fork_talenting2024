@@ -1,0 +1,10 @@
+<!-- <div class="song-list">
+  <mat-grid-list cols="5" rowHeight="1:1" gutterSize="16px">
+    <mat-grid-tile *ngFor="let song of musicFiles">
+      <app-song-card [song]="song" (playSong)="playMusic(song)" />
+    </mat-grid-tile>
+  </mat-grid-list>
+</div> -->
+<div class="song-list-container">
+  <app-song-card *ngFor="let song of musicFiles" [song]="song"></app-song-card>
+</div>
