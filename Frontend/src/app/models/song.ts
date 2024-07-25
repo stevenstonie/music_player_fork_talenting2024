@@ -1,11 +1,14 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export interface Song {
   fileName: string;
-  title: string;
+  title?: string;
   creationDate: Date;
-  album: string;
+  album?: string;
   isLiked: boolean;
-  artist: string;
   rating: number;
+  artist?: string;
   duration: number;
-  image: string;
+  imageData?: Uint8Array;
+  imageUrl?: SafeUrl;
 }

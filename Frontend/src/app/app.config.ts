@@ -10,4 +10,4 @@ export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(), provideAnimationsAsync(), provideAnimationsAsync(), provideHttpClient(withFetch())]
 };
 
-export const API_ENDPOINT_BASE_PATH = 'http://localhost:5034/api';
+export const API_ENDPOINT_BASE_PATH = 'http://localhost:8080/api';

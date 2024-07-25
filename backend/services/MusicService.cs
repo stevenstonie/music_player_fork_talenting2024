@@ -30,6 +30,7 @@ namespace backend.services
 				{
 					Track track = new(song);
 					FileInfo fileInfo = new(song);
+					PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
 
 					return new Song
 					{
@@ -38,7 +39,9 @@ namespace backend.services
 						CreationDate = fileInfo.CreationTime,
 						Album = track.Album != "" ? track.Album : null,
 						Rating = 0,     // TODO: !!!
-						Artist = track.Artist != "" ? track.Artist : null
+						Artist = track.Artist != "" ? track.Artist : null,
+						Duration = track.Duration,
+						ImageData = imageBinary?.PictureData
 					};
 				});
 		}

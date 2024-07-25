@@ -16,8 +16,8 @@ export class MusicService {
       artist: 'Ed Sheeran',
       rating: 4.5,
       duration: 263,
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song2.mp3',
@@ -28,7 +28,8 @@ export class MusicService {
       artist: 'The Weeknd',
       rating: 4.8,
       duration: 200, // in seconds
-      image: 'https://i.scdn.co/image/ab67616d00001e028863bc11d2aa12b54f5aeb36',
+      // image:
+      //   'https://i.scdn.co/image/ab67616d00001e028863bc11d2aa12b54f5aeb36',
     },
     {
       fileName: 'song3.mp3',
@@ -39,8 +40,8 @@ export class MusicService {
       artist: 'Adele',
       rating: 4.7,
       duration: 285, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song4.mp3',
@@ -51,8 +52,8 @@ export class MusicService {
       artist: 'Billie Eilish',
       rating: 4.6,
       duration: 194, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song5.mp3',
@@ -63,8 +64,8 @@ export class MusicService {
       artist: 'Lil Nas X',
       rating: 4.4,
       duration: 157, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song6.mp3',
@@ -75,8 +76,8 @@ export class MusicService {
       artist: 'Adele',
       rating: 4.9,
       duration: 228, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song7.mp3',
@@ -87,8 +88,8 @@ export class MusicService {
       artist: 'Mark Ronson ft. Bruno Mars',
       rating: 4.7,
       duration: 269, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song8.mp3',
@@ -99,8 +100,8 @@ export class MusicService {
       artist: 'Camila Cabello ft. Young Thug',
       rating: 4.5,
       duration: 217, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song9.mp3',
@@ -111,8 +112,8 @@ export class MusicService {
       artist: 'The Chainsmokers ft. Halsey',
       rating: 4.4,
       duration: 244, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
     {
       fileName: 'song10.mp3',
@@ -123,8 +124,8 @@ export class MusicService {
       artist: 'Post Malone, Swae Lee',
       rating: 4.6,
       duration: 158, // in seconds
-      image:
-        'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
+      // image:
+      //   'https://images.genius.com/3710c6f28a35a0635d3e54ea30a8fc5c.1000x1000x1.png',
     },
   ];
 
