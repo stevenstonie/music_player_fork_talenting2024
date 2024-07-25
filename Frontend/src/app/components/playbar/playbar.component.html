@@ -1,38 +1,37 @@
-<div class="playbar-container">
+<div class="playbar-container" *ngIf="currentSong">
   <div class="playbar-song-info">
     <img
       class="playbar-song-info_img"
-      src="https://i.scdn.co/image/ab67616d0000b27351700837cdbc6adddb88560a"
+      [src]="currentSong?.imageUrl"
       alt="song image"
     />
 
     <div class="playbar-song-info_text">
-      <p class="playbar-song-info_text_title">Chk Chk Boom</p>
-      <p class="playbar-song-info_text_artist">Stray Kids</p>
+      <p class="playbar-song-info_text_title">{{ currentSong?.title }}</p>
+      <p class="playbar-song-info_text_artist">{{ currentSong?.artist }}</p>
     </div>
 
     <div class="playbar-song-info_favorite">
-      <mat-icon fontIcon="favorite_outline" />
+      <mat-icon fontIcon="favorite_outline"></mat-icon>
     </div>
-    <!-- daca e favorit sa fie fill -->
-    <!-- <div class="playbar-song-info_favorite">
-      <mat-icon  fontIcon="favorite"></mat-icon>
-    </div> -->
   </div>
 
   <div class="playbar-main">
     <div class="playbar-progress">
-      <mat-slider
+      <input
+        type="range"
         min="0"
         [max]="songDurationInSeconds"
         step="1"
-        discrete
-        [displayWith]="formatLabel"
-      >
-        <input matSliderThumb />
-      </mat-slider>
+        [value]="currentTimeInSeconds"
+        (input)="onRangeInput($event)"
+        (change)="onRangeChange($event)"
+        class="slider"
+      />
 
-      <p class="playbar-progress_time">3:14</p>
+      <p class="playbar-progress_time">
+        {{ formatLabel(currentTimeInSeconds) }}
+      </p>
     </div>
 
     <div class="playbar-controls_buttons">
@@ -42,9 +41,13 @@
       >
         <mat-icon fontIcon="skip_previous"></mat-icon>
       </button>
-      <button class="playbar-controls_buttons_play-stop" mat-icon-button>
-        <!-- <mat-icon fontIcon="pause"></mat-icon> -->
-        <mat-icon fontIcon="play_arrow"></mat-icon>
+      <button
+        class="playbar-controls_buttons_play-stop"
+        mat-icon-button
+        (click)="playPauseSong()"
+      >
+        <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
+        <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
       </button>
       <button class="playbar-controls_buttons_next" mat-icon-button>
         <mat-icon fontIcon="skip_next"></mat-icon>
