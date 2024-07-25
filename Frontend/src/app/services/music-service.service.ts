@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { API_ENDPOINT_BASE_PATH } from '../app.config';
 import { Song } from '../models/song';
 
@@ -30,7 +30,6 @@ export class MusicService {
   // ---------------------------------------------------
 
   private handleError(error: HttpErrorResponse) {
-    console.error(error);
-    return throwError(() => new Error());
+    return throwError(() => new Error( error.message ));
   }
 }

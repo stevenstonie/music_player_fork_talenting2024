@@ -23,6 +23,7 @@ export class TestStreamSongComponent {
         console.log(response);
       },
       error: error => {
+        console.error("error streaming song: ",error);
       }
     });
   }
