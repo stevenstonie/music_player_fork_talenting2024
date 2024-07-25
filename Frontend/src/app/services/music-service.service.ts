@@ -8,19 +8,19 @@ import { Song } from '../models/song';
   providedIn: 'root'
 })
 export class MusicService {
-  private readonly _musicUrl = 'music';
+  private readonly _musicPath = 'music';
 
   constructor(private http: HttpClient){}
 
   getMusicFiles(): Observable<Song[]> {
-    return this.http.get<Song[]>(`${API_ENDPOINT_BASE_PATH}/${this._musicUrl}/getAll`)
+    return this.http.get<Song[]>(`${API_ENDPOINT_BASE_PATH}/${this._musicPath}/getAll`)
       .pipe(
         catchError(this.handleError)
       )
   }
 
   streamSong(fileName: string): Observable<Blob> {
-    return this.http.get(`${API_ENDPOINT_BASE_PATH}/${this._musicUrl}/stream/${fileName}`, { responseType: 'blob' })
+    return this.http.get(`${API_ENDPOINT_BASE_PATH}/${this._musicPath}/stream/${fileName}`, { responseType: 'blob' })
       .pipe(
         // manage for error being an instance of Blob
         catchError(this.handleError)

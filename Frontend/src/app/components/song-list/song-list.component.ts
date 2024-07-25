@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from '../../services/music-service.service'; 
+import { MusicService } from '../../services/music-service.service';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SongCardComponent } from './song-card/song.component';
 import { Song } from '../../models/song';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-song-list',
@@ -14,18 +13,20 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./song-list.component.scss'],
 })
 export class SongListComponent implements OnInit {
-  musicFiles: Song[] = [];
+  songs: Song[] = [];
   currentTrack: Song | null = null;
 
-  constructor(private musicService: MusicService, private sanitizer: DomSanitizer) {}
+  constructor(private musicService: MusicService) { }
 
   ngOnInit(): void {
+    this.getSongsFromLocal();
+  }
+
+  getSongsFromLocal(): void {
     this.musicService.getMusicFiles().subscribe({
       next: (data) => {
-        this.musicFiles = data.map(song => {
-          if (song.imageData) {
-            song.imageUrl = this.convertImageDataToUrlAndSanitize(song.imageData);
-          }
+        this.songs = data.map(song => {
+          song.imageUrl = this.getImageUrl(song.imageData?.toString());
           return song;
         });
       },
@@ -35,15 +36,13 @@ export class SongListComponent implements OnInit {
     });
   }
 
-  convertImageDataToUrlAndSanitize(imageData: Uint8Array): SafeUrl {
-    const uint8Array = new Uint8Array(imageData);
-    const blob = new Blob([uint8Array], { type: 'image/jpeg' });
-    const imageUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
-
-    return imageUrl
-  }
-
   playMusic(file: Song): void {
     this.currentTrack = file;
+  }
+
+  // ---------------------------------------------------
+
+  getImageUrl(base64Image: string | undefined): string {
+    return base64Image ? `data:image/jpeg;base64,${base64Image}` : `assets/default-song-image.png`;
   }
 }
