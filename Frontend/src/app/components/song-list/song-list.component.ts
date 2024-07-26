@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from '../../services/music-service.service';
 import { CommonModule } from '@angular/common';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { SongCardComponent } from './song-card/song.component';
 import { Song } from '../../models/song';
 import { MusicUtils } from '../utils/music-utils';
@@ -9,7 +8,7 @@ import { MusicUtils } from '../utils/music-utils';
 @Component({
   selector: 'app-song-list',
   standalone: true,
-  imports: [SongCardComponent, CommonModule, MatGridListModule],
+  imports: [SongCardComponent, CommonModule],
   templateUrl: './song-list.component.html',
   styleUrls: ['./song-list.component.scss'],
 })

@@ -1,10 +1,14 @@
 <div class="playbar-container" *ngIf="currentSong">
   <div class="playbar-song-info">
-    <img class="playbar-song-info_img" [src]="currentSong?.imageUrl" alt="song image" />
+    <img
+      class="playbar-song-info_img"
+      [src]="currentSong.imageUrl"
+      alt="song image"
+    />
 
     <div class="playbar-song-info_text">
-      <p class="playbar-song-info_text_title">{{ currentSong?.title }}</p>
-      <p class="playbar-song-info_text_artist">{{ currentSong?.artist }}</p>
+      <p class="playbar-song-info_text_title">{{ currentSong.title }}</p>
+      <p class="playbar-song-info_text_artist">{{ currentSong.artist }}</p>
     </div>
 
     <div class="playbar-song-info_favorite">
@@ -17,8 +21,16 @@
       <p class="playbar-time">
         {{ formatLabel(currentTimeInSeconds) }}
       </p>
-      <input type="range" min="0" [max]="songDurationInSeconds" step="1" [value]="currentTimeInSeconds"
-        (input)="onRangeInput($event)" (change)="onRangeChange($event)" class="playbar-progress_slider" />
+      <input
+        type="range"
+        min="0"
+        [max]="songDurationInSeconds"
+        step="1"
+        [value]="currentTimeInSeconds"
+        (input)="onRangeInput($event)"
+        (change)="onRangeChange($event)"
+        class="playbar-progress_slider"
+      />
 
       <p class="playbar-time">
         {{ formatLabel(songDurationInSeconds) }}
@@ -26,10 +38,17 @@
     </div>
 
     <div class="playbar-controls_buttons">
-      <button class="playbar-controls_buttons_previous no_hover_effect" mat-icon-button>
+      <button
+        class="playbar-controls_buttons_previous no_hover_effect"
+        mat-icon-button
+      >
         <mat-icon fontIcon="skip_previous"></mat-icon>
       </button>
-      <button class="playbar-controls_buttons_play-stop" mat-icon-button (click)="playPauseSong()">
+      <button
+        class="playbar-controls_buttons_play-stop"
+        mat-icon-button
+        (click)="playPauseSong()"
+      >
         <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
         <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
       </button>

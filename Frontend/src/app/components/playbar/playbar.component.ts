@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MusicService } from '../../services/music-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Song } from '../../models/song';
 
 @Component({
@@ -20,21 +20,30 @@ export class PlaybarComponent implements OnInit {
   audio: HTMLAudioElement | null = null;
   currentSong!: Song;
   isUserChangingRange: boolean = false;
+  isBrowser: boolean;
 
-  constructor(private musicService: MusicService, private sanitizer: DomSanitizer) { }
+  constructor(
+    private musicService: MusicService,
+    private sanitizer: DomSanitizer,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit(): void {
-    this.audio = new Audio();
-    
-    this.audio.addEventListener('timeupdate', () => {
-      if (!this.isUserChangingRange) {
-        this.currentTimeInSeconds = this.audio?.currentTime ?? 0;
-      }
-    });
+    if (this.isBrowser) {
+      this.audio = new Audio();
 
-    this.audio.addEventListener('loadedmetadata', () => {
-      this.songDurationInSeconds = this.audio?.duration ?? 0;
-    });
+      this.audio.addEventListener('timeupdate', () => {
+        if (!this.isUserChangingRange) {
+          this.currentTimeInSeconds = this.audio?.currentTime ?? 0;
+        }
+      });
+
+      this.audio.addEventListener('loadedmetadata', () => {
+        this.songDurationInSeconds = this.audio?.duration ?? 0;
+      });
+    }
 
     this.musicService.currentSong$.subscribe((song) => {
       if (song) {
