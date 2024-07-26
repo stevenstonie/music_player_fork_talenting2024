@@ -1,4 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+	height: 100%;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+	* {
+		box-sizing: border-box;
+	}
+
+	.mat-body p,
+	.mat-body-2 p,
+	.mat-typography .mat-body p,
+	.mat-typography .mat-body-2 p,
+	.mat-typography p {
+		margin: 0;
+	}
+
+	.mat-h2, .mat-headline-6, .mat-typography .mat-h2, .mat-typography .mat-headline-6, .mat-typography h2 {
+		font: 500 20px / 25px Roboto, sans-serif;
+		letter-spacing: normal;
+		margin: 0;
+	}
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+}
