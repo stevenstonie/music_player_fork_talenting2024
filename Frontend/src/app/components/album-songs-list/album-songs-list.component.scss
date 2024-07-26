@@ -1,0 +1,137 @@
+.album-details {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+
+	img {
+		width: 150px;
+		height: 150px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-right: 20px;
+	}
+
+	.album-info {
+		h1 {
+			margin: 0;
+			font-size: 2em;
+		}
+
+		h2 {
+			margin: 5px 0;
+			font-size: 1.5em;
+			color: #666;
+		}
+
+		p {
+			margin: 0;
+			font-size: 1em;
+			color: #999;
+		}
+	}
+}
+
+.song-table {
+	width: 100%;
+	border-collapse: collapse;
+
+	.table-header {
+		display: flex;
+		background-color: #f7f7f7;
+		font-weight: bold;
+		padding: 10px 0;
+		border-bottom: 2px solid #ddd;
+
+		.header-item {
+			flex: 1;
+			padding: 5px 10px;
+			text-align: left;
+		}
+	}
+
+	.table-row {
+		display: flex;
+		padding: 10px 0;
+		border-bottom: 1px solid #ddd;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+
+		&:hover {
+			background-color: #f0f0f0;
+		}
+
+		.row-item {
+			flex: 1;
+			padding: 5px 10px;
+			text-align: left;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.album-details {
+		flex-direction: column;
+		align-items: flex-start;
+
+		img {
+			width: 100%;
+			height: auto;
+			margin-bottom: 15px;
+		}
+
+		.album-info {
+			text-align: center;
+			width: 100%;
+
+			h1 {
+				font-size: 1.5em;
+			}
+
+			h2 {
+				font-size: 1.2em;
+			}
+
+			p {
+				font-size: 0.9em;
+			}
+		}
+	}
+
+	.song-table {
+
+		.table-header,
+		.table-row {
+			display: block;
+
+			.header-item,
+			.row-item {
+				display: block;
+				text-align: right;
+				padding: 5px;
+				border-bottom: 1px solid #ddd;
+			}
+
+			.header-item {
+				font-weight: bold;
+				text-align: left;
+			}
+
+			.row-item {
+				text-align: left;
+				padding-left: 50%;
+				position: relative;
+			}
+
+			.row-item:before {
+				content: attr(data-label);
+				position: absolute;
+				left: 0;
+				width: 50%;
+				padding-left: 10px;
+				font-weight: bold;
+				text-align: left;
+				white-space: nowrap;
+			}
+		}
+	}
+}

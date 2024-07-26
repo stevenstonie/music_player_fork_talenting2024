@@ -1,0 +1,21 @@
+<div class="album-details" *ngIf="album">
+	<img [src]="album?.coverImage" alt="{{ album?.albumName }}">
+	<div class="album-info">
+		<h1>{{ album?.albumName }}</h1>
+		<h2>{{ album?.artistName }}</h2>
+		<p>Release Date: {{ album?.releaseDate }}</p>
+	</div>
+</div>
+
+<div class="song-table" *ngIf="album?.songs.length">
+	<div class="table-header">
+		<div class="header-item">#</div>
+		<div class="header-item">Title</div>
+		<div class="header-item">Duration</div>
+	</div>
+	<div *ngFor="let song of album.songs; let i = index" class="table-row" (click)="playSong(song.songId)">
+		<div class="row-item">{{ i + 1 }}</div>
+		<div class="row-item">{{ song.songName }}</div>
+		<div class="row-item">{{ song.duration }}</div>
+	</div>
+</div>
