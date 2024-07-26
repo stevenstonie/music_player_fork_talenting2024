@@ -7,6 +7,7 @@ import { Song } from '../../../models/song';
 import { MusicService } from '../../../services/music.service';
 import { Utils } from '../../utils/utils';
 import { DEFAULT_SONG_IMAGE_PATH } from '../../../app.config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-song-card',
@@ -18,7 +19,7 @@ import { DEFAULT_SONG_IMAGE_PATH } from '../../../app.config';
 export class SongCardComponent {
   @Input() song!: Song;
 
-  constructor(private musicService: MusicService) {}
+  constructor(private musicService: MusicService, private router: Router) { }
 
   playSong(): void {
     console.log('playing song: ', this.song);
@@ -27,5 +28,13 @@ export class SongCardComponent {
 
   handleImageError(): void {
     this.song.imageUrl = Utils.getImageUrlOrDefault(null, DEFAULT_SONG_IMAGE_PATH);
+  }
+
+  navigateToAlbumWindow(albumName: string): void {
+    if (albumName == null) {
+      return;
+    }
+
+    this.router.navigate(['/album', albumName]);
   }
 }
