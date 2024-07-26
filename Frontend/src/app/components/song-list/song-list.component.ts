@@ -3,7 +3,8 @@ import { MusicService } from '../../services/music.service';
 import { CommonModule } from '@angular/common';
 import { SongCardComponent } from './song-card/song.component';
 import { Song } from '../../models/song';
-import { MusicUtils } from '../utils/music-utils';
+import { Utils } from '../utils/utils';
+import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
 
 @Component({
   selector: 'app-song-list',
@@ -26,8 +27,8 @@ export class SongListComponent implements OnInit {
     this.musicService.getMusicFiles().subscribe({
       next: (data) => {
         this.songs = data.map(song => {
-          song.imageUrl = MusicUtils.getImageUrl(
-            song.imageData != null ? song.imageData.toString() : null);
+          song.imageUrl = Utils.getImageUrlOrDefault(
+            song.imageData != null ? song.imageData.toString() : null, DEFAULT_SONG_IMAGE_PATH);
 
           return song;
         });

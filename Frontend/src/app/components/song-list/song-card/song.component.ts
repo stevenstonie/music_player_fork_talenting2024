@@ -5,7 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Song } from '../../../models/song';
 import { MusicService } from '../../../services/music.service';
-import { MusicUtils } from '../../utils/music-utils';
+import { Utils } from '../../utils/utils';
+import { DEFAULT_SONG_IMAGE_PATH } from '../../../app.config';
 
 @Component({
   selector: 'app-song-card',
@@ -25,6 +26,6 @@ export class SongCardComponent {
   }
 
   handleImageError(): void {
-    this.song.imageUrl = MusicUtils.getImageUrl(null);
+    this.song.imageUrl = Utils.getImageUrlOrDefault(null, DEFAULT_SONG_IMAGE_PATH);
   }
 }
