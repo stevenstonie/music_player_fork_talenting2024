@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MusicService } from '../../services/music-service.service';
+import { MusicService } from '../../services/music.service';
 import { CommonModule } from '@angular/common';
 import { SongCardComponent } from './song-card/song.component';
 import { Song } from '../../models/song';
