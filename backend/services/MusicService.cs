@@ -5,66 +5,101 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.services
 {
-	public class MusicService
-	{
-		private readonly string _musicPath;
-		private readonly string extension = "MP3";
+    public class MusicService
+    {
+        private readonly string _musicPath;
+        private readonly string _extension = "MP3";
+        private readonly List<Song> _cachedSongs;
+        private readonly Random _random = new Random();
 
-		public MusicService(string musicPath)
-		{
-			_musicPath = musicPath;
+        public MusicService(string musicPath)
+        {
+            _musicPath = musicPath;
 
-			if (!Directory.Exists(_musicPath))
-			{
-				Directory.CreateDirectory(_musicPath);
-			}
-		}
+            if (!Directory.Exists(_musicPath))
+            {
+                Directory.CreateDirectory(_musicPath);
+            }
 
-		public IEnumerable<Song> GetSongs()
-		{
-			string[] files = Directory.GetFiles(_musicPath);
+            _cachedSongs = InitializeCache();
+        }
 
-			return files
-				.Where(file => Path.GetExtension(file).Equals($".{extension}", comparisonType: StringComparison.OrdinalIgnoreCase))
-				.Select(song =>
-				{
-					Track track = new(song);
-					FileInfo fileInfo = new(song);
-					PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
+        private List<Song> InitializeCache()
+        {
+            string[] files = Directory.GetFiles(_musicPath);
+            var songs = new List<Song>();
 
-					return new Song
-					{
-						FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
-						Title = track.Title,
-						CreationDate = fileInfo.CreationTime,
-						Album = track.Album != "" ? track.Album : null,
-						Rating = 0,     // TODO: !!!
-						Artist = track.Artist != "" ? track.Artist : null,
-						Duration = track.Duration,
-						ImageData = imageBinary?.PictureData
-					};
-				});
-		}
+            foreach (var file in files)
+            {
+                if (Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase))
+                {
+                    Track track = new Track(file);
+                    FileInfo fileInfo = new FileInfo(file);
+                    PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
+                    double rating = Math.Round(_random.NextDouble() * 5, 2);
 
+                    var song = new Song
+                    {
+                        FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
+                        Title = track.Title,
+                        CreationDate = fileInfo.CreationTime,
+                        Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
+                        Rating = rating,
+                        Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
+                        Duration = track.Duration,
+                        ImageData = imageBinary?.PictureData
+                    };
 
-		// test getting all songs and searching for their name. be creative. lots of ASCII symbols and stuff.
+                    songs.Add(song);
+                }
+            }
 
-		public IActionResult StreamSong(string fileName)
-		{
-			string songPath = $"{_musicPath}/{fileName}.{extension}";
+            return songs;
+        }
 
-			if (!File.Exists(songPath))
-			{
-				throw new ResourceNotFoundCustomException("Song not found.");
-			}
+        public IEnumerable<Song> GetSongs()
+        {
+            return _cachedSongs;
+        }
 
-			FileStream stream;
-			stream = new($"{_musicPath}/{fileName}.{extension}", FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+        public IActionResult StreamSong(string fileName)
+        {
+            string songPath = Path.Combine(_musicPath, $"{fileName}.{_extension}");
 
-			return new FileStreamResult(stream, $"audio/{extension}")
-			{
-				EnableRangeProcessing = true
-			};
-		}
-	}
+            if (!File.Exists(songPath))
+            {
+                throw new ResourceNotFoundCustomException("Song not found.");
+            }
+
+            FileStream stream = new FileStream(songPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+
+            return new FileStreamResult(stream, $"audio/{_extension}")
+            {
+                EnableRangeProcessing = true
+            };
+        }
+
+        public IEnumerable<Song> GetAlbumSongs(string albumName)
+        {
+            return _cachedSongs.Where(song => song.Album != null && song.Album.Equals(albumName, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public IEnumerable<Song> GetTopRatedSongsByArtist(string artistName)
+        {
+            return _cachedSongs
+                .Where(song => song.Artist != null && song.Artist.Equals(artistName, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(song => song.Rating)
+                .Take(5);
+        }
+
+        public IEnumerable<string> GetAlbumsByArtist(string artistName)
+        {
+            return _cachedSongs
+                .Where(song => song.Artist != null && song.Artist.Equals(artistName, StringComparison.OrdinalIgnoreCase))
+                .Select(song => song.Album)
+                .Where(album => album != null) 
+                .Distinct() 
+                .Cast<string>(); 
+        }
+    }
 }
