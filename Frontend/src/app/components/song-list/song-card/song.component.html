@@ -1,6 +1,6 @@
 <mat-card class="song-card-container">
   <mat-card-header>
-    <mat-card-title>{{ song.title }}</mat-card-title>
+    <mat-card-title>{{ song.title }} <span *ngIf="!song.title">empty title</span></mat-card-title>
     <button mat-icon-button class="favorite-icon">
       <mat-icon fontIcon="favorite_outline"></mat-icon>
       <!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
@@ -11,8 +11,8 @@
 
   <div class="song-card_info">
     <mat-card-content>
-      <h2 class="song-card_info-artist">{{ song.artist }}</h2>
-      <p class="song-card_info-album">{{ song.album }}</p>
+      <h2 class="song-card_info-artist">artist: {{ song.artist }} <span *ngIf="!song.artist">none</span></h2>
+      <p class="song-card_info-album">album: {{ song.album }} <span *ngIf="!song.album">none</span></p>
     </mat-card-content>
 
     <mat-card-actions>
