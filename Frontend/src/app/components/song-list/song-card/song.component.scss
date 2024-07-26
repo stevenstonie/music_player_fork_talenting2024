@@ -1,33 +1,52 @@
 .song-card-container {
   border-radius: 8px;
   width: 300px;
-  height: 450px;
+  height: 470px;
+  * {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 
-  mat-card-header {
+  .song-card-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 16px;
     background-color: bisque;
     border-radius: 8px 8px 0 0;
+    overflow: hidden;
+
+    .song-card-header-title {
+      width: 100%;
+      font-weight: 500;
+      font-size: 1.5em;
+    }
   }
 
   img {
     width: 90%;
+    aspect-ratio: 1/1;
     margin: 10px auto;
   }
 
-  .song-card_info {
+  .song-card-footer {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
 
-    .song-card_info-artist {
-      font-weight: bold;
-    }
+    .song-card-info {
+      padding: 10px 0 20px 20px;
+      width: 80%;
 
-    .song-card_info-album {
-      font-style: italic;
-      margin-bottom: 10px;
+      .song-card-info-artist {
+        font-weight: bold;
+      }
+
+      .song-card-info-album {
+        font-style: italic;
+      }
     }
   }
 }

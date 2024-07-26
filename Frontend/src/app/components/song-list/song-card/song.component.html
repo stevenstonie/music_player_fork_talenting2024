@@ -1,19 +1,21 @@
 <mat-card class="song-card-container">
-  <mat-card-header>
-    <mat-card-title>{{ song.title }} <span *ngIf="!song.title">empty title</span></mat-card-title>
+  <div class="song-card-header">
+    <p class="song-card-header-title">{{ song.title?.trim() || 'none'}}</p>
     <button mat-icon-button class="favorite-icon">
       <mat-icon fontIcon="favorite_outline"></mat-icon>
       <!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
     </button>
-  </mat-card-header>
+  </div>
 
   <img mat-card-image [src]="song.imageUrl" (error)="handleImageError()" alt="song image" />
 
-  <div class="song-card_info">
-    <mat-card-content>
-      <h2 class="song-card_info-artist">artist: {{ song.artist }} <span *ngIf="!song.artist">none</span></h2>
-      <p class="song-card_info-album">album: {{ song.album }} <span *ngIf="!song.album">none</span></p>
-    </mat-card-content>
+  <div class="song-card-footer">
+    <div class="song-card-info">
+      <h2 class="song-card-info-artist">artist:</h2>
+      <h2 class="song-card-info-artist">{{ song.artist?.trim() || 'none' }}</h2>
+      <p class="song-card-info-album" style="margin-top: 10px;">album:</p>
+      <p class="song-card-info-album">{{ song.album?.trim() || 'none' }}</p>
+    </div>
 
     <mat-card-actions>
       <button mat-icon-button (click)="playSong()">
