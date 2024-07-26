@@ -12,8 +12,8 @@ import { DEFAULT_SONG_IMAGE_PATH } from '../../../app.config';
   selector: 'app-song-card',
   standalone: true,
   imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule],
-  templateUrl: './song.component.html',
-  styleUrl: './song.component.scss',
+  templateUrl: './song-card.component.html',
+  styleUrl: './song-card.component.scss',
 })
 export class SongCardComponent {
   @Input() song!: Song;

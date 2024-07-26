@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MusicService } from '../../services/music.service';
 import { CommonModule } from '@angular/common';
-import { SongCardComponent } from './song-card/song.component';
+import { SongCardComponent } from './song-card/song-card.component';
 import { Song } from '../../models/song';
 import { Utils } from '../utils/utils';
 import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
