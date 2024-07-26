@@ -13,17 +13,19 @@ export class MusicService {
   private currentSongSubject: BehaviorSubject<Song | null> = new BehaviorSubject<Song | null>(null);
   currentSong$: Observable<Song | null> = this.currentSongSubject.asObservable();
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) { }
+
+  setCurrentSong(song: Song): void {
+    this.currentSongSubject.next(song);
+  }
+
+  // api calls ---------------------------------------------------------------
 
   getMusicFiles(): Observable<Song[]> {
     return this.http.get<Song[]>(`${API_ENDPOINT_BASE_PATH}/${this._musicPath}/getAll`)
       .pipe(
         catchError(this.handleError)
       )
-  }
-
-  setCurrentSong(song: any): void {
-    this.currentSongSubject.next(song);
   }
 
   streamSong(fileName: string): Observable<Blob> {
@@ -37,6 +39,6 @@ export class MusicService {
   // ---------------------------------------------------
 
   private handleError(error: HttpErrorResponse) {
-    return throwError(() => new Error( error.message ));
+    return throwError(() => new Error(error.message));
   }
 }

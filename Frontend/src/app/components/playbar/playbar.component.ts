@@ -21,20 +21,19 @@ export class PlaybarComponent implements OnInit {
   currentSong!: Song;
   isUserChangingRange: boolean = false;
 
-  constructor(
-    private musicService: MusicService,
-    private sanitizer: DomSanitizer
-  ) {}
+  constructor(private musicService: MusicService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.audio = new Audio();
+    
     this.audio.addEventListener('timeupdate', () => {
       if (!this.isUserChangingRange) {
-        this.currentTimeInSeconds = this.audio?.currentTime || 0;
+        this.currentTimeInSeconds = this.audio?.currentTime ?? 0;
       }
     });
+
     this.audio.addEventListener('loadedmetadata', () => {
-      this.songDurationInSeconds = this.audio?.duration || 0;
+      this.songDurationInSeconds = this.audio?.duration ?? 0;
     });
 
     this.musicService.currentSong$.subscribe((song) => {
@@ -45,8 +44,8 @@ export class PlaybarComponent implements OnInit {
     });
   }
 
-  streamSong(song: any): void {
-    this.musicService.streamSong(song.title).subscribe({
+  streamSong(song: Song): void {
+    this.musicService.streamSong(song.fileName).subscribe({
       next: (response) => {
         const audioUrl = URL.createObjectURL(response);
         this.songUrl = this.sanitizer.bypassSecurityTrustUrl(audioUrl);

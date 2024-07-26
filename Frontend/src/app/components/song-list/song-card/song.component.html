@@ -7,7 +7,7 @@
     </button>
   </mat-card-header>
 
-  <img mat-card-image [src]="song.imageUrl" alt="song image" />
+  <img mat-card-image [src]="song.imageUrl" (error)="handleImageError()" alt="song image" />
 
   <div class="song-card_info">
     <mat-card-content>

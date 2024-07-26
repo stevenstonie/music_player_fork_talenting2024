@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SongCardComponent } from './song-card/song.component';
 import { Song } from '../../models/song';
+import { MusicUtils } from '../utils/music-utils';
 
 @Component({
   selector: 'app-song-list',
@@ -26,7 +27,9 @@ export class SongListComponent implements OnInit {
     this.musicService.getMusicFiles().subscribe({
       next: (data) => {
         this.songs = data.map(song => {
-          song.imageUrl = this.getImageUrl(song.imageData?.toString());
+          song.imageUrl = MusicUtils.getImageUrl(
+            song.imageData != null ? song.imageData.toString() : null);
+
           return song;
         });
       },
@@ -38,11 +41,5 @@ export class SongListComponent implements OnInit {
 
   playMusic(file: Song): void {
     this.currentTrack = file;
-  }
-
-  // ---------------------------------------------------
-
-  getImageUrl(base64Image: string | undefined): string {
-    return base64Image ? `data:image/jpeg;base64,${base64Image}` : `assets/default-song-image.png`;
   }
 }
