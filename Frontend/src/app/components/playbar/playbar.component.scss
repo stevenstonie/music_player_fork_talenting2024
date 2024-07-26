@@ -1,0 +1,83 @@
+.playbar-container {
+  color: white;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  background-color: #1c1c1c;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+
+  .playbar-song-info {
+    width: 25%;
+    display: flex;
+    align-items: center;
+    margin: 0 10px 0 30px;
+
+    .playbar-song-info_img {
+      height: 80px;
+      aspect-ratio: 1 / 1;
+    }
+
+    .playbar-song-info_text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 10px;
+
+      p {
+        margin: 0;
+      }
+
+      .playbar-song-info_text_title {
+        font-size: 1.2em;
+      }
+
+      .playbar-song-info_text_artist {
+        font-style: italic;
+        font-size: 0.9em;
+      }
+    }
+
+    .playbar-song-info_favorite {
+      color: #c2185b;
+      cursor: pointer;
+    }
+  }
+
+  .playbar-main {
+    width: 100%;
+    margin: 5px;
+
+    .playbar-progress {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 100px;
+
+      .playbar-progress_slider {
+        width: 100%;
+        color: #c2185b;
+        background-color: #1c1c1c;
+      }
+
+      .playbar-time {
+        margin: 0px 10px 0px 5px;
+        font-size: 1.1em;
+        font-style: italic;
+      }
+    }
+
+    .playbar-controls_buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .playbar-controls_buttons_play-stop {
+        border: 1.5px solid white;
+      }
+    }
+  }
+}

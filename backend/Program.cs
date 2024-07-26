@@ -1,20 +1,28 @@
-
+using backend.exceptions;
 using backend.services;
 
 namespace backend
 {
-	public class Program
+	public static class Program
 	{
 		public static void Main(string[] args)
 		{
-			var builder = WebApplication.CreateBuilder(args);
+			WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-			builder.Services.AddControllers();
-			builder.Services.AddTransient<MusicService>(provider => new MusicService("./../music"));
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
+			ConfigureServices(builder);
 
-			var app = builder.Build();
+			WebApplication app = builder.Build();
+
+			ConfigurePipelines(app);
+
+			app.Run();
+		}
+
+		private static void ConfigurePipelines(WebApplication app)
+		{
+			app.UseCors("AllowSpecificOrigin");
+
+			app.UseMiddleware<GlobalExceptionHandler>();
 
 			if (app.Environment.IsDevelopment())
 			{
@@ -28,8 +36,26 @@ namespace backend
 
 
 			app.MapControllers();
+		}
 
-			app.Run();
+		private static void ConfigureServices(WebApplicationBuilder builder)
+		{
+			builder.Services.AddCors(options =>
+				{
+					options.AddPolicy("AllowSpecificOrigin",
+					policy =>
+					{
+						policy.WithOrigins("http://localhost:4200")
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					});
+				});
+
+			builder.Services.AddControllers();
+			builder.Services.AddTransient<MusicService>(provider => new MusicService("./../music"));
+
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
 		}
 	}
 }
