@@ -4,7 +4,7 @@
   position: relative;
   align-items: center;
   justify-content: space-between;
-  height: var(--height-song-card);
+  height: var(--height-song-strap);
   width: var(--width-songs-section);
   border: 2px black solid;
   border-bottom: none;
@@ -60,7 +60,7 @@
 
 	button {
 		opacity: 50%;
-		height: calc(var(--height-song-card) - 5px);
+		height: calc(var(--height-song-strap) - 5px);
 		transition: opacity 0.15s ease-in-out;
 		aspect-ratio: 1 / 1;
 		border-radius: 35px 0 0 35px;

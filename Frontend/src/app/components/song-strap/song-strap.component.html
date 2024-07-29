@@ -4,12 +4,12 @@
   </button>
 
   <div class="song-strap-header">
-    <h2 class="song-strap-header-title">{{ song.title?.trim() || "none" }}</h2>
-    <p class="song-strap-info-artist">{{ song.artist?.trim() || "none" }}</p>
+    <h2 class="song-strap-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{ song.title?.trim() || "none" }}</h2>
+    <p class="song-strap-info-artist underline-on-hover" (click)="navigateToArtistWindow(song.artist!)">{{ song.artist?.trim() || "none" }}</p>
   </div>
 
 	<div class="song-strap-info">
-		<p class="song-strap-info-album"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
+		<p class="song-strap-info-album underline-on-hover" (click)="navigateToAlbumWindow(song.album!)"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
 			song.album?.trim() || 'none' }}
 		</p>
 	</div>
