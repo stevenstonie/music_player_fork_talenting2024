@@ -1,1 +1,15 @@
-<p>artist-page works!</p>
+<div id="artist-window">
+	<h2>{{artistName}}</h2>
+
+	<p>top rated songs:</p>
+
+	<ul *ngFor="let song of topRatedSongs">
+		<app-song-strap [song]="song"></app-song-strap>
+	</ul>
+
+	<p>albums:</p>
+
+	<ul *ngFor="let album of albums">
+		<li class="underline-on-hover" (click)="navigateToAlbumPage(album)">{{album}}</li>
+	</ul>
+</div>

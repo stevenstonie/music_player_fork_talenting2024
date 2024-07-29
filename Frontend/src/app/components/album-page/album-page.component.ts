@@ -7,7 +7,7 @@ import { Utils } from '../utils/utils';
 import { CommonModule } from '@angular/common';
 import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
 import { PlaybarComponent } from "../playbar/playbar.component";
-import { SongStrapComponent } from "../album-page/song-strap/song-strap.component";
+import { SongStrapComponent } from "../song-strap/song-strap.component";
 
 
 @Component({

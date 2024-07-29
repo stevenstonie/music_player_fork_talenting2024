@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Song } from '../../../models/song';
-import { MusicService } from '../../../services/music.service';
+import { Song } from '../../models/song';
+import { MusicService } from '../../services/music.service';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { Utils } from '../../utils/utils';
-import { Observable } from 'rxjs';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-song-strap',
@@ -16,10 +15,8 @@ import { Observable } from 'rxjs';
 })
 export class SongStrapComponent {
   @Input() song!: Song;
-  currentSong$: Observable<Song | null>;
 
-  constructor(private musicService: MusicService) { 
-    this.currentSong$ = this.musicService.currentSong$;
+  constructor(private musicService: MusicService) {
   }
 
   playSong(): void {

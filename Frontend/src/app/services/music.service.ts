@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 import { API_ENDPOINT_BASE_PATH } from '../app.config';
 import { Song } from '../models/song';
+import { ArtistDetailsResponse } from '../models/payloads';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { Song } from '../models/song';
 export class MusicService {
   private readonly _musicPathKey = 'music';
   private readonly _albumPathKey = 'album';
+  private readonly _artistPathKey = 'artist';
 
   private songs: Song[] = [];
   private currentSongSubject: BehaviorSubject<Song | null> =
@@ -58,6 +60,15 @@ export class MusicService {
     return this.songs.filter((song) =>
       title ? song.title?.toLowerCase().includes(title.toLowerCase()) : true
     );
+  }
+
+  // api calls ---------------------------------------------------------------
+
+  getTopRatedSongsAndAllAlbums(artistName: string): Observable<ArtistDetailsResponse> {
+    return this.http.get<ArtistDetailsResponse>(
+      `${API_ENDPOINT_BASE_PATH}/${this._musicPathKey}/${this._artistPathKey}/${artistName}`
+    )
+      .pipe(catchError(this.handleError));
   }
 
   getAlbumSongs(albumName: string): Observable<Song[]> {
