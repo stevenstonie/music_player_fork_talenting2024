@@ -1,0 +1,15 @@
+<div id="artist-window">
+	<h1 id="artist-name">{{artistName}}</h1>
+
+	<h1 style="margin: 10px 30px;">top rated songs:</h1>
+
+	<ul *ngFor="let song of topRatedSongs">
+		<app-song-strap [song]="song"></app-song-strap>
+	</ul>
+
+	<h1 style="margin: 10px 30px;">albums:</h1>
+
+	<ul *ngFor="let album of albums">
+		<li class="underline-on-hover" (click)="navigateToAlbumWindow(album)">{{album}}</li>
+	</ul>
+</div>

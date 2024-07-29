@@ -1,0 +1,13 @@
+<div id="album-window">
+	<section id="album-window-header" *ngIf="songs[0]">
+	  <h1 style="font-size: xx-large;">{{songs[0].album}}</h1>
+	  <img [src]="songs[0].imageUrl" (error)="handleImageError(songs[0])" alt="album image" />
+	  <h2>by: <span (click)="navigateToArtistWindow(songs[0].artist!)" class="underline-on-hover">{{songs[0].artist?.trim() || 'no artist'}}</span></h2>
+	</section>
+  
+	<ul *ngFor="let song of songs; let i = index">
+	  <app-song-strap [song]="song"></app-song-strap>
+	</ul>
+  </div>
+  
+  <app-playbar></app-playbar>

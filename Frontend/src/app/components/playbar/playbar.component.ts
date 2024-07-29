@@ -5,6 +5,7 @@ import { MusicService } from '../../services/music.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Song } from '../../models/song';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-playbar',
@@ -21,6 +22,7 @@ export class PlaybarComponent implements OnInit {
   currentSong!: Song;
   isUserChangingRange: boolean = false;
   isBrowser: boolean;
+  favoriteSong: boolean = false;
 
   constructor(
     private musicService: MusicService,
@@ -44,6 +46,8 @@ export class PlaybarComponent implements OnInit {
         this.songDurationInSeconds = this.audio?.duration ?? 0;
       });
     }
+
+    this.musicService.loadSongs();
 
     this.musicService.currentSong$.subscribe((song) => {
       if (song) {
@@ -80,6 +84,18 @@ export class PlaybarComponent implements OnInit {
     }
   }
 
+  toggleFavorite(): void {
+    this.favoriteSong = !this.favoriteSong;
+  }
+
+  playNextSong(): void {
+    this.musicService.setNextSong();
+  }
+
+  playPreviousSong(): void {
+    this.musicService.setPreviousSong();
+  }
+
   onRangeInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.isUserChangingRange = true;
@@ -100,5 +116,10 @@ export class PlaybarComponent implements OnInit {
     const minutes: number = Math.floor(value / 60);
     const seconds: number = Math.floor(value % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  handleImageError(song: Song): void {
+    console.log('handleImageError: ', song);
+    song.imageUrl = Utils.handleImageError(song.imageUrl!);
   }
 }

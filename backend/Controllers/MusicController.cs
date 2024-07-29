@@ -39,7 +39,5 @@ namespace backend.controllers
 
             return Ok(result);
         }
-
-
     }
 }

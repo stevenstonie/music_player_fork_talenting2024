@@ -3,6 +3,7 @@
     <img
       class="playbar-song-info_img"
       [src]="currentSong.imageUrl"
+      (error)="handleImageError(currentSong)"
       alt="song image"
     />
 
@@ -11,8 +12,10 @@
       <p class="playbar-song-info_text_artist">{{ currentSong.artist }}</p>
     </div>
 
-    <div class="playbar-song-info_favorite">
-      <mat-icon fontIcon="favorite_outline"></mat-icon>
+    <div class="playbar-song-info_favorite" (click)="toggleFavorite()">
+      <mat-icon
+        [fontIcon]="favoriteSong ? 'favorite' : 'favorite_outline'"
+      ></mat-icon>
     </div>
   </div>
 
@@ -29,7 +32,7 @@
         [value]="currentTimeInSeconds"
         (input)="onRangeInput($event)"
         (change)="onRangeChange($event)"
-        class="playbar-progress_slider"
+        class="playbar-progress-slider"
       />
 
       <p class="playbar-time">
@@ -37,22 +40,28 @@
       </p>
     </div>
 
-    <div class="playbar-controls_buttons">
+    <div class="playbar-controls-buttons">
       <button
-        class="playbar-controls_buttons_previous no_hover_effect"
+        class="playbar-controls-buttons_previous no_hover_effect"
         mat-icon-button
+        (click)="playPreviousSong()"
       >
         <mat-icon fontIcon="skip_previous"></mat-icon>
       </button>
       <button
-        class="playbar-controls_buttons_play-stop"
+        class="playbar-controls-buttons-play-stop"
         mat-icon-button
         (click)="playPauseSong()"
       >
-        <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
-        <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
+        <mat-icon
+          [fontIcon]="audio?.paused ? 'play_arrow' : 'pause'"
+        ></mat-icon>
       </button>
-      <button class="playbar-controls_buttons_next" mat-icon-button>
+      <button
+        class="playbar-controls-buttons-next"
+        mat-icon-button
+        (click)="playNextSong()"
+      >
         <mat-icon fontIcon="skip_next"></mat-icon>
       </button>
     </div>
