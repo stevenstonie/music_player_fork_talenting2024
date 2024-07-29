@@ -11,3 +11,5 @@ export const appConfig: ApplicationConfig = {
 };
 
 export const API_ENDPOINT_BASE_PATH = 'http://localhost:8080/api';
+
+export const DEFAULT_SONG_IMAGE_PATH = 'assets/default-song-image.png';

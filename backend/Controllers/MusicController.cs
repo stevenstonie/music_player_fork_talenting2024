@@ -19,5 +19,25 @@ namespace backend.controllers
 		public IActionResult StreamSong(string fileName) {
 			return _musicService.StreamSong(fileName);
 		}
-	}
+
+		[HttpGet("album/{albumName}")]
+		public ActionResult<IEnumerable<Song>> GetAlbumSongs(string albumName) {
+            return Ok(_musicService.GetAlbumSongs(albumName));
+        }
+
+        [HttpGet("artist/{artistName}")]
+        public ActionResult GetArtistDetails(string artistName)
+        {
+            var topRatedSongs = _musicService.GetTopRatedSongsByArtist(artistName);
+            var albums = _musicService.GetAlbumsByArtist(artistName);
+
+            var result = new
+            {
+                TopRatedSongs = topRatedSongs,
+                Albums = albums
+            };
+
+            return Ok(result);
+        }
+    }
 }

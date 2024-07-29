@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MusicService } from '../../services/music.service';
 import { CommonModule } from '@angular/common';
-import { SongCardComponent } from './song-card/song.component';
+import { SongCardComponent } from './song-card/song-card.component';
 import { Song } from '../../models/song';
-import { MusicUtils } from '../utils/music-utils';
+import { Utils } from '../utils/utils';
+import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
 
 @Component({
   selector: 'app-song-list',
@@ -13,7 +14,7 @@ import { MusicUtils } from '../utils/music-utils';
   styleUrls: ['./song-list.component.scss'],
 })
 export class SongListComponent implements OnInit {
-  songs: Song[] = [];
+  @Input() songs: Song[] = [];
   currentTrack: Song | null = null;
 
   constructor(private musicService: MusicService) { }
@@ -24,10 +25,10 @@ export class SongListComponent implements OnInit {
 
   getSongsFromLocal(): void {
     this.musicService.getMusicFiles().subscribe({
-      next: (data) => {
-        this.songs = data.map(song => {
-          song.imageUrl = MusicUtils.getImageUrl(
-            song.imageData != null ? song.imageData.toString() : null);
+      next: (songs: Song[]) => {
+        this.songs = songs.map(song => {
+          song.imageUrl = Utils.getImageUrlOrDefault(
+            song.imageData != null ? song.imageData.toString() : null, DEFAULT_SONG_IMAGE_PATH);
 
           return song;
         });

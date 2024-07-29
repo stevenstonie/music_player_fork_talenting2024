@@ -1,0 +1,122 @@
+.song-card {
+	position: relative;
+	border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
+	width: var(--width-of-container);
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	border: 2px black inset;
+	border-bottom: none;
+	--width-of-container: 300px;
+	--header-section-height: 60px;
+	--image-size: 90%;
+	--footer-height: 70px;
+	--border-radius-default: 30px;
+	transition-duration: .15s;
+	background: linear-gradient(to bottom, lavender, transparent);
+
+	&-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 8px 16px;
+		border-radius: calc(var(--border-radius-default) - 1px) calc(var(--border-radius-default) - 1px) 0 0;
+		overflow: hidden;
+		height: var(--header-section-height);
+
+		color: var(--primary-color);
+
+		&-title {
+			display: flex;
+			align-items: center;
+			width: calc(var(--width-of-container) - 70px);
+			height: 100%;
+			font-weight: 500;
+			font-size: 1.5em;
+		}
+	}
+
+	img {
+		position: relative;
+		width: var(--image-size);
+		aspect-ratio: 1/1;
+		margin: 0 auto;
+		border-radius: 50%;
+	}
+
+  &-play-button {
+    position: absolute;
+    top: var(--header-section-height);
+    left: calc((100% - var(--image-size)) / 2);
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    width: var(--image-size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    z-index: 10;
+    color: var(--accent-color);
+    background-color: rgba(42, 42, 42, 0.407);
+    border: none;
+    cursor: pointer;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		#play-arrow {
+			width: auto;
+			height: auto;
+			font-size: 10em;
+		}
+	}
+
+	&-footer {
+		padding: 10px 0 10px 10px;
+		height: var(--footer-height);
+		color: var(--primary-color);
+		margin-top: -20px;
+
+		&-album {
+			font-style: italic;
+			font-size: 1.2em;
+			font-weight: lighter;
+		}
+
+	}
+
+	* {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.favorite-icon {
+		position: absolute;
+		top: 0;
+		right: -20px;
+		opacity: 0;
+	}
+
+	&:hover {
+		background: linear-gradient(to bottom, rgb(223, 223, 255), transparent);
+
+    .favorite-icon {
+      opacity: 100%;
+      transform: translateX(-50%);
+      transition-duration: 0.15s;
+    }
+  }
+
+  .underline-on-hover {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &.current {
+    border-color: #2f0954;
+    background: linear-gradient(to bottom, #ffe6e6, #fff);
+    box-shadow: 0 0 10px #4e1c81;
+  }
+}

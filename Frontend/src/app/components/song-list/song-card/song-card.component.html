@@ -1,0 +1,42 @@
+<div
+  class="song-card"
+  [class.current]="(currentSong$ | async)?.title === song.title"
+>
+  <section class="song-card-header">
+    <span>
+      <p
+        class="song-card-header-title underline-on-hover"
+        (click)="navigateToAlbumWindow(song.album!)"
+      >
+        {{ song.title?.trim() || "none" }}
+      </p>
+			<span style="display: flex; justify-content: space-between;">
+				<p class="song-card-info-artist underline-on-hover" (click)="navigateToArtistWindow(song.artist!)">{{ song.artist?.trim() || 'no artist' }}</p>
+			</span>
+    </span>
+    <button mat-icon-button class="favorite-icon" (click)="toggleFavorite()">
+      <mat-icon
+        [fontIcon]="favoriteSong ? 'favorite' : 'favorite_outline'"
+      ></mat-icon>
+    </button>
+  </section>
+
+  <button
+    *ngIf="(currentSong$ | async)?.title !== song.title"
+    class="song-card-play-button"
+    (click)="playSong()"
+  >
+    <mat-icon fontIcon="play_arrow" id="play-arrow"></mat-icon>
+  </button>
+  <img
+    [src]="song.imageUrl"
+    (error)="handleImageError(song)"
+    alt="song image"
+  />
+
+	<section class="song-card-footer">
+		<p>{{ getDurationStringFromSeconds(song.duration) }}</p>
+		<p class="underline-on-hover" (click)="navigateToAlbumWindow(song.album!)"> <mat-icon
+				style="vertical-align: middle;">album</mat-icon>{{ song.album?.trim() || 'none' }} </p>
+	</section>
+</div>
