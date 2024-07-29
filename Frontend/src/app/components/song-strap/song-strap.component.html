@@ -1,0 +1,30 @@
+<mat-card class="song-strap">
+	<button class="song-strap-play-button" (click)="playSong()">
+		<mat-icon id="play-arrow" fontIcon="play_arrow"></mat-icon>
+	</button>
+
+	<div class="song-strap-header">
+		<h2 class="song-strap-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{
+			song.title?.trim() || "none" }}</h2>
+		<p class="song-strap-info-artist underline-on-hover" (click)="navigateToArtistWindow(song.artist!)">{{
+			song.artist?.trim() || "none" }}</p>
+	</div>
+
+	<p class="song-strap-rating"><mat-icon
+			style="vertical-align: top; font-size: 1.4em; color: gold; -webkit-text-stroke: 1px black;">star</mat-icon>{{
+		song.rating }}</p>
+
+	<div class="song-strap-info">
+		<p class="song-strap-info-album underline-on-hover" (click)="navigateToAlbumWindow(song.album!)"><mat-icon
+				style="vertical-align: middle;">album</mat-icon>{{
+			song.album?.trim() || 'none' }}
+		</p>
+	</div>
+
+	<p>{{ getDurationStringFromSeconds(song.duration) }}</p>
+
+	<button mat-icon-button class="favorite-icon">
+		<mat-icon fontIcon="favorite_outline"></mat-icon>
+		<!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
+	</button>
+</mat-card>

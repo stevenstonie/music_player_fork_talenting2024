@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+	height: 100%;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	.mat-body p,
+	.mat-body-2 p,
+	.mat-typography .mat-body p,
+	.mat-typography .mat-body-2 p,
+	.mat-typography p {
+		margin: 0;
+	}
+
+	.mat-h2,
+	.mat-headline-6,
+	.mat-typography .mat-h2,
+	.mat-typography .mat-headline-6,
+	.mat-typography h2 {
+		font: 500 20px / 25px Roboto, sans-serif;
+		letter-spacing: normal;
+		margin: 0;
+	}
+
+}
+
+:root {
+	--primary-color: #00065c;
+	--secondary-color: #4c0e87;
+	--accent-color: #6480ff;
+}
+
+.underline-on-hover {
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+	}
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	background: linear-gradient(90deg, aliceblue 25%, bisque 100%);
+}

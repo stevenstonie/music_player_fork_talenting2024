@@ -1,0 +1,12 @@
+<div class="search-bar">
+  <mat-icon matPrefix>search</mat-icon>
+  <input
+    matInput
+    name="search"
+    class="search-bar-input"
+    type="text"
+    placeholder="Find the perfect song"
+    [(ngModel)]="title"
+    (ngModelChange)="onInputChange()"
+  />
+</div>

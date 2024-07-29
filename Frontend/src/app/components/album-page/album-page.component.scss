@@ -1,0 +1,39 @@
+#album-window {
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+	margin-top: 50px;
+	--width-album-section: 20vw;
+	--width-songs-section: 70vw;
+	--height-song-strap: 70px;
+
+	&-header {
+		width: var(--width-album-section);
+		position: absolute;
+		text-align: center;
+		top: 10px;
+		right: 30px;
+
+		* {
+			margin: 5px;
+		}
+
+		img {
+			width: 100%;
+			aspect-ratio: 1/1;
+			border-radius: 50%;
+		}
+	}
+
+	@media screen and (max-width: 900px) {
+		#album-window-header {
+			position: static;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-self: center;
+			align-items: center;
+			width: 250px;
+		}
+	}
+}
