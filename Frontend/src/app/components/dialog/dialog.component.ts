@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
