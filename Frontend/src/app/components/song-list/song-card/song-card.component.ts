@@ -31,11 +31,20 @@ export class SongCardComponent {
 
   navigateToAlbumWindow(albumName: string): void {
     if (albumName == null) {
-      alert('add a dialog window here');
+      alert('this song doesnt have an associated album.');
       return;
     }
 
     window.open(`/album/${albumName}`, '_blank');
+  }
+
+  navigateToArtistWindow(artistName: string): void {
+    if (artistName == null) {
+      alert('this song doesnt have an associated artist.');
+      return;
+    }
+
+    window.open(`/artist/${artistName}`, '_blank');
   }
 
   getDurationStringFromSeconds(seconds: number): string {

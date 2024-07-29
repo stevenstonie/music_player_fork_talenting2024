@@ -73,13 +73,6 @@
 		}
 	}
 
-	.underline-on-hover {
-		&:hover {
-			cursor: pointer;
-			text-decoration: underline;
-		}
-	}
-
 	@media screen and (max-width: 900px) {
 		width: 95%;
 	}

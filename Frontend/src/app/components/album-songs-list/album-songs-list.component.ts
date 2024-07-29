@@ -30,16 +30,20 @@ export class AlbumSongsListComponent implements OnInit {
         this.songs = songs.map(song => {
           song.imageUrl = Utils.getImageUrlOrDefault(
             song.imageData != null ? song.imageData.toString() : null, DEFAULT_SONG_IMAGE_PATH);
-        this.songs = songs.map(song => {
-          song.imageUrl = Utils.getImageUrlOrDefault(
-            song.imageData != null ? song.imageData.toString() : null, DEFAULT_SONG_IMAGE_PATH);
 
-          return song;
-        });
           return song;
         });
       });
     }
+  }
+
+  navigateToArtistWindow(artistName: string): void {
+    if (artistName == null) {
+      alert('this song doesnt have an associated artist.');
+      return;
+    }
+
+    window.open(`/artist/${artistName}`, '_blank');
   }
 
   handleImageError(song: Song): void {

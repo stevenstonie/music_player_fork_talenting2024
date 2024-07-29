@@ -3,6 +3,7 @@
     <img
       class="playbar-song-info_img"
       [src]="currentSong.imageUrl"
+      (error)="handleImageError(currentSong)"
       alt="song image"
     />
 

@@ -18,7 +18,7 @@ export class MusicService {
     this.currentSongSubject.asObservable();
   currentSongIndex: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   setCurrentSong(song: Song): void {
     const index = this.songs.findIndex((s) => s.title === song.title);
@@ -59,7 +59,7 @@ export class MusicService {
   getAlbumSongs(albumName: string): Observable<Song[]> {
     return this.http
       .get<Song[]>(
-        `${API_ENDPOINT_BASE_PATH}/${this._musicPathKey}/album/${albumName}`
+        `${API_ENDPOINT_BASE_PATH}/${this._musicPathKey}/${this._albumPathKey}/${albumName}`
       )
       .pipe(catchError(this.handleError));
   }

@@ -107,11 +107,4 @@
 			transition-duration: .15s;
 		}
 	}
-
-	.underline-on-hover {
-		&:hover {
-			cursor: pointer;
-			text-decoration: underline;
-		}
-	}
 }

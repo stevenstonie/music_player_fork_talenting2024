@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Utils } from '../../utils/utils';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-song-strap',
@@ -15,8 +16,11 @@ import { Utils } from '../../utils/utils';
 })
 export class SongStrapComponent {
   @Input() song!: Song;
+  currentSong$: Observable<Song | null>;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicService: MusicService) { 
+    this.currentSong$ = this.musicService.currentSong$;
+  }
 
   playSong(): void {
     console.log('playing song: ', this.song);

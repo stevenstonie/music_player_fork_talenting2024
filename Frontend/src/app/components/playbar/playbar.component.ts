@@ -5,6 +5,7 @@ import { MusicService } from '../../services/music.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Song } from '../../models/song';
+import { Utils } from '../utils/utils';
 
 @Component({
   selector: 'app-playbar',
@@ -110,5 +111,10 @@ export class PlaybarComponent implements OnInit {
     const minutes: number = Math.floor(value / 60);
     const seconds: number = Math.floor(value % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+
+  handleImageError(song: Song): void {
+    console.log('handleImageError: ', song);
+    song.imageUrl = Utils.handleImageError(song.imageUrl!);
   }
 }

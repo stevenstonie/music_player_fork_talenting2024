@@ -4,7 +4,7 @@
 			<p class="song-card-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{
 				song.title?.trim() || 'none'}}</p>
 			<span style="display: flex; justify-content: space-between;">
-				<p class="song-card-info-artist underline-on-hover">{{ song.artist?.trim() || 'no artist' }}</p>
+				<p class="song-card-info-artist underline-on-hover" (click)="navigateToArtistWindow(song.artist!)">{{ song.artist?.trim() || 'no artist' }}</p>
 			</span>
 		</span>
 		<button mat-icon-button class="favorite-icon">
