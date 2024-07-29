@@ -7,20 +7,30 @@ import { MusicService } from '../../../services/music.service';
 import { Utils } from '../../utils/utils';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'app-song-card',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CommonModule],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+  ],
   templateUrl: './song-card.component.html',
-  styleUrl: './song-card.component.scss',
+  styleUrls: ['./song-card.component.scss'],
 })
 export class SongCardComponent {
   @Input() song!: Song;
   favoriteSong: boolean = false;
   currentSong$: Observable<Song | null>;
 
-  constructor(private musicService: MusicService, private router: Router) {
+  constructor(
+    private musicService: MusicService,
+    private router: Router,
+    private dialog: MatDialog
+  ) {
     this.currentSong$ = this.musicService.currentSong$;
   }
 
@@ -33,8 +43,8 @@ export class SongCardComponent {
   }
 
   navigateToAlbumWindow(albumName: string): void {
-    if (albumName == null) {
-      alert('this song doesnt have an associated album.');
+    if (!albumName) {
+      this.openDialog("This song doesn't have an associated album.");
       return;
     }
 
@@ -42,8 +52,8 @@ export class SongCardComponent {
   }
 
   navigateToArtistWindow(artistName: string): void {
-    if (artistName == null) {
-      alert('this song doesnt have an associated artist.');
+    if (!artistName) {
+      this.openDialog("This song doesn't have an associated artist.");
       return;
     }
 
@@ -56,5 +66,11 @@ export class SongCardComponent {
 
   handleImageError(song: Song): void {
     song.imageUrl = Utils.handleImageError(song.imageUrl!);
+  }
+
+  openDialog(message: string): void {
+    this.dialog.open(DialogComponent, {
+      data: { message },
+    });
   }
 }
