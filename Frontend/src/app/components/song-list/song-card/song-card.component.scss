@@ -114,7 +114,8 @@
   }
 
   &.current {
-    border: 2px solid red; // example effect
-    background-color: #f8f8f8; // example effect
+    border-color: #2f0954;
+    background: linear-gradient(to bottom, #ffe6e6, #fff);
+    box-shadow: 0 0 10px #4e1c81;
   }
 }

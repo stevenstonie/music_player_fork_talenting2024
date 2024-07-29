@@ -11,15 +11,14 @@ import { Utils } from '../../utils/utils';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './song-strap.component.html',
-  styleUrl: './song-strap.component.scss'
+  styleUrl: './song-strap.component.scss',
 })
 export class SongStrapComponent {
   @Input() song!: Song;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicService: MusicService) {}
 
   playSong(): void {
-    console.log('playing song: ', this.song);
     this.musicService.setCurrentSong(this.song);
   }
 

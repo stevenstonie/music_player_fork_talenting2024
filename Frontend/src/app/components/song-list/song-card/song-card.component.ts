@@ -18,6 +18,7 @@ import { Observable } from 'rxjs';
 })
 export class SongCardComponent {
   @Input() song!: Song;
+  favoriteSong: boolean = false;
   currentSong$: Observable<Song | null>;
 
   constructor(private musicService: MusicService, private router: Router) {
@@ -25,8 +26,11 @@ export class SongCardComponent {
   }
 
   playSong(): void {
-    console.log('playing song: ', this.song);
     this.musicService.setCurrentSong(this.song);
+  }
+
+  toggleFavorite(): void {
+    this.favoriteSong = !this.favoriteSong;
   }
 
   navigateToAlbumWindow(albumName: string): void {
@@ -35,7 +39,7 @@ export class SongCardComponent {
       return;
     }
 
-    window.open(`/album/${albumName}`, '_blank');
+    this.router.navigate(['/album', albumName]);
   }
 
   handleImageError(song: Song): void {
