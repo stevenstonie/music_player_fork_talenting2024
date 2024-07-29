@@ -47,7 +47,7 @@ export class SongCardComponent {
       return;
     }
 
-    window.open(`/artist/${artistName}`, '_blank');
+    this.router.navigate(['/artist', artistName]);
   }
 
   getDurationStringFromSeconds(seconds: number): string {

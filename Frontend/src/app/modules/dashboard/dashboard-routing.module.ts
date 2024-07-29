@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardPageComponent } from '../../components/dashboard-page/dashboard-page.component';
-import { AlbumSongsListComponent } from '../../components/album-songs-list/album-songs-list.component';
 import { ArtistPageComponent } from '../../components/artist-page/artist-page.component';
+import { AlbumPageComponent } from '../../components/album-page/album-page.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'album/:albumName',
-    component: AlbumSongsListComponent,
+    component: AlbumPageComponent,
   },
   {
     path: 'artist/:artistName',
