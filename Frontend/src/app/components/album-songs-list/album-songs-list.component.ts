@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MusicService } from '../../services/music.service';
 import { Song } from '../../models/song';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Utils } from '../utils/utils';
 import { CommonModule } from '@angular/common';
@@ -15,7 +14,7 @@ import { SongStrapComponent } from "./song-strap/song-strap.component";
   selector: 'app-album-songs-list',
   templateUrl: './album-songs-list.component.html',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatIconModule, PlaybarComponent, SongStrapComponent],
+  imports: [CommonModule, MatIconModule, PlaybarComponent, SongStrapComponent],
   styleUrls: ['./album-songs-list.component.scss']
 })
 export class AlbumSongsListComponent implements OnInit {

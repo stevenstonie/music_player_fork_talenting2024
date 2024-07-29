@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Song } from '../../../models/song';
 import { MusicService } from '../../../services/music.service';
@@ -12,7 +11,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-song-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule, CommonModule],
+  imports: [MatButtonModule, MatIconModule, CommonModule],
   templateUrl: './song-card.component.html',
   styleUrl: './song-card.component.scss',
 })

@@ -9,7 +9,6 @@ import { Song } from '../models/song';
 })
 export class MusicService {
   private readonly _musicPathKey = 'music';
-  private readonly _albumPathKey = 'album';
 
   private songs: Song[] = [];
   private currentSongSubject: BehaviorSubject<Song | null> =
@@ -54,7 +53,11 @@ export class MusicService {
     });
   }
 
-  // api calls ---------------------------------------------------------------
+  searchSongs(title: string): Song[] {
+    return this.songs.filter((song) =>
+      title ? song.title?.toLowerCase().includes(title.toLowerCase()) : true
+    );
+  }
 
   getAlbumSongs(albumName: string): Observable<Song[]> {
     return this.http
@@ -76,13 +79,8 @@ export class MusicService {
         `${API_ENDPOINT_BASE_PATH}/${this._musicPathKey}/stream/${fileName}`,
         { responseType: 'blob' }
       )
-      .pipe(
-        // manage for error being an instance of Blob
-        catchError(this.handleError)
-      );
+      .pipe(catchError(this.handleError));
   }
-
-  // ---------------------------------------------------
 
   private handleError(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message));
