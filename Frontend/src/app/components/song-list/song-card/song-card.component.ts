@@ -34,6 +34,10 @@ export class SongCardComponent {
     window.open(`/album/${albumName}`, '_blank');
   }
 
+  getDurationStringFromSeconds(seconds: number): string {
+    return Utils.getDurationStringFromSeconds(seconds);
+  }
+
   handleImageError(song: Song): void {
     song.imageUrl = Utils.handleImageError(song.imageUrl!);
   }

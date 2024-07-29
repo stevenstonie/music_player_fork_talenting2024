@@ -8,13 +8,10 @@
 		<p class="song-strap-info-artist">{{ song.artist?.trim() || 'none' }}</p>
 	</div>
 
-	<div class="song-strap-footer">
-		<div class="song-strap-info">
-			<p class="song-strap-info-album"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
-				song.album?.trim() || 'none' }}
-			</p>
-		</div>
-
+	<div class="song-strap-info">
+		<p class="song-strap-info-album"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
+			song.album?.trim() || 'none' }}
+		</p>
 	</div>
 
 	<p>{{ getDurationStringFromSeconds(song.duration) }}</p>

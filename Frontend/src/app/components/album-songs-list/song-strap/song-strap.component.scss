@@ -13,7 +13,13 @@
 	background: linear-gradient(to bottom, lavender, transparent);
 
 	& * {
-		margin: 0 10px 0 10px;
+		margin: 0 10px;
+	}
+
+	* {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 	}
 
 	&-header {
@@ -36,64 +42,70 @@
 	}
 
 	&-play-button {
-		opacity: 50%;
 		transform: translateX(-8px);
-		transition: opacity 0.15s ease-in-out;
-		height: calc(var(--height-song-card) - 5px);
-		aspect-ratio: 1 / 1;
-		border-radius: 50% 0 0 50%;
-		color: var(--secondary-color);
-		background-color: rgba(42, 42, 42, 0.407);
-		border: none;
-		cursor: pointer;
-
-		&:hover {
-			opacity: 1;
-		}
 	}
 
-	&-footer {
+	&-info {
 		color: var(--primary-color);
-
-		&-album {
-			font-style: italic;
-			font-size: 1.2em;
-			font-weight: lighter;
-		}
-
-	}
-
-	* {
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
 	}
 
 	.favorite-icon {
-		opacity: 50%;
-		transition: opacity 0.15s ease-in-out;
-		height: calc(var(--height-song-card) - 5px);
-		aspect-ratio: 1 / 1;
-		border-radius: 50% 0 0 50%;
 		transform: translateX(9px);
-		color: var(--secondary-color);
-		background-color: rgba(42, 42, 42, 0.407);
-		border: none;
-		cursor: pointer;
-
-		&:hover {
-			opacity: 1;
-		}
 	}
 
 	&:hover {
 		background: linear-gradient(to bottom, rgb(222, 222, 255), transparent);
 	}
 
+	button {
+		opacity: 50%;
+		height: calc(var(--height-song-card) - 5px);
+		transition: opacity 0.15s ease-in-out;
+		aspect-ratio: 1 / 1;
+		border-radius: 35px 0 0 35px;
+		color: var(--secondary-color);
+		background-color: rgba(42, 42, 42, 0.407);
+		border: none;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
 	.underline-on-hover {
 		&:hover {
 			cursor: pointer;
 			text-decoration: underline;
+		}
+	}
+
+	@media screen and (max-width: 900px) {
+		width: 95%;
+	}
+
+	@media screen and (max-width: 600px) {
+		border-radius: 25px 0 0 25px;
+
+		.song-strap-info {
+			display: none;
+		}
+
+		&-play-button {
+			transform: translateX(0px);
+		}
+
+		.favorite-icon {
+			transform: translateX(0px);
+		}
+
+		button {
+			width: 40px;
+			border-radius: 23px 0 0 23px;
+		}
+
+		* {
+			margin: 0 2px;
 		}
 	}
 }

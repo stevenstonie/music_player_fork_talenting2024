@@ -3,7 +3,9 @@
 		<span>
 			<p class="song-card-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{
 				song.title?.trim() || 'none'}}</p>
-			<p class="song-card-info-artist underline-on-hover">{{ song.artist?.trim() || 'no artist' }}</p>
+			<span style="display: flex; justify-content: space-between;">
+				<p class="song-card-info-artist underline-on-hover">{{ song.artist?.trim() || 'no artist' }}</p>
+			</span>
 		</span>
 		<button mat-icon-button class="favorite-icon">
 			<mat-icon fontIcon="favorite_outline"></mat-icon>
@@ -18,7 +20,7 @@
 	<img mat-card-image [src]="song.imageUrl" (error)="handleImageError(song)" alt="song image" />
 
 	<section class="song-card-footer">
-		<!-- <p class="song-card-footer-album">album:</p> -->
+		<p>{{ getDurationStringFromSeconds(song.duration) }}</p>
 		<p class="underline-on-hover" (click)="navigateToAlbumWindow(song.album!)"> <mat-icon
 				style="vertical-align: middle;">album</mat-icon>{{ song.album?.trim() || 'none' }} </p>
 	</section>

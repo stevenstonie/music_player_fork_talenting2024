@@ -10,7 +10,7 @@
 	--width-of-container: 300px;
 	--header-section-height: 60px;
 	--image-size: 90%;
-	--footer-height: 40px;
+	--footer-height: 70px;
 	--border-radius-default: 30px;
 	transition-duration: .15s;
 	background: linear-gradient(to bottom, lavender, transparent);
@@ -23,12 +23,13 @@
 		border-radius: calc(var(--border-radius-default) - 1px) calc(var(--border-radius-default) - 1px) 0 0;
 		overflow: hidden;
 		height: var(--header-section-height);
+
 		color: var(--primary-color);
 
 		&-title {
 			display: flex;
 			align-items: center;
-			max-width: calc(var(--width-of-container) - 70px);
+			width: calc(var(--width-of-container) - 70px);
 			height: 100%;
 			font-weight: 500;
 			font-size: 1.5em;
@@ -74,6 +75,7 @@
 		padding: 10px 0 10px 10px;
 		height: var(--footer-height);
 		color: var(--primary-color);
+		margin-top: -20px;
 
 		&-album {
 			font-style: italic;
