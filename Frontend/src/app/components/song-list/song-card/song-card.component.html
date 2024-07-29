@@ -1,26 +1,25 @@
-<mat-card class="song-card-container">
-	<div class="song-card-header">
-	  <p class="song-card-header-title" (click)="navigateToAlbumWindow(song.album!)">{{ song.title?.trim() || 'none'}}</p>
-	  <button mat-icon-button class="favorite-icon">
-		<mat-icon fontIcon="favorite_outline"></mat-icon>
-		<!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
-	  </button>
-	</div>
-  
-	<img mat-card-image [src]="song.imageUrl" (error)="handleImageError()" alt="song image" />
-  
-	<div class="song-card-footer">
-	  <div class="song-card-info">
-		<h2 class="song-card-info-artist">artist:</h2>
-		<h2 class="song-card-info-artist">{{ song.artist?.trim() || 'none' }}</h2>
-		<p class="song-card-info-album" style="margin-top: 10px;">album:</p>
-		<p class="song-card-info-album" (click)="navigateToAlbumWindow(song.album!)">{{ song.album?.trim() || 'none' }}</p>
-	  </div>
-  
-	  <mat-card-actions>
-		<button mat-icon-button (click)="playSong()">
-		  <mat-icon fontIcon="play_arrow"></mat-icon>
+<div class="song-card">
+	<section class="song-card-header">
+		<span>
+			<p class="song-card-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{
+				song.title?.trim() || 'none'}}</p>
+			<p class="song-card-info-artist underline-on-hover">{{ song.artist?.trim() || 'no artist' }}</p>
+		</span>
+		<button mat-icon-button class="favorite-icon">
+			<mat-icon fontIcon="favorite_outline"></mat-icon>
+			<!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
 		</button>
-	  </mat-card-actions>
-	</div>
-  </mat-card>
+	</section>
+
+	<!-- add directive logic for this button to make it visible if the song is currently playing -->
+	<button class="song-card-play-button" (click)="playSong()">
+		<mat-icon fontIcon="play_arrow" id="play-arrow"></mat-icon>
+	</button>
+	<img mat-card-image [src]="song.imageUrl" (error)="handleImageError()" alt="song image" />
+
+	<section class="song-card-footer">
+		<!-- <p class="song-card-footer-album">album:</p> -->
+		<p class="underline-on-hover" (click)="navigateToAlbumWindow(song.album!)"> <mat-icon
+				style="vertical-align: middle;">album</mat-icon>{{ " " + song.album?.trim() || 'none' }} </p>
+	</section>
+</div>

@@ -29,7 +29,7 @@
         [value]="currentTimeInSeconds"
         (input)="onRangeInput($event)"
         (change)="onRangeChange($event)"
-        class="playbar-progress_slider"
+        class="playbar-progress-slider"
       />
 
       <p class="playbar-time">
@@ -37,22 +37,22 @@
       </p>
     </div>
 
-    <div class="playbar-controls_buttons">
+    <div class="playbar-controls-buttons">
       <button
-        class="playbar-controls_buttons_previous no_hover_effect"
+        class="playbar-controls-buttons_previous no_hover_effect"
         mat-icon-button
       >
         <mat-icon fontIcon="skip_previous"></mat-icon>
       </button>
       <button
-        class="playbar-controls_buttons_play-stop"
+        class="playbar-controls-buttons-play-stop"
         mat-icon-button
         (click)="playPauseSong()"
       >
         <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
         <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
       </button>
-      <button class="playbar-controls_buttons_next" mat-icon-button>
+      <button class="playbar-controls-buttons-next" mat-icon-button>
         <mat-icon fontIcon="skip_next"></mat-icon>
       </button>
     </div>
