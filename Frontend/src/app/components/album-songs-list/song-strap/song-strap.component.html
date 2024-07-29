@@ -1,0 +1,26 @@
+<mat-card class="song-strap">
+	<button class="song-strap-play-button" (click)="playSong()">
+		<mat-icon id="play-arrow" fontIcon="play_arrow"></mat-icon>
+	</button>
+
+	<div class="song-strap-header">
+		<h2 class="song-strap-header-title">{{ song.title?.trim() || 'none'}}</h2>
+		<p class="song-strap-info-artist">{{ song.artist?.trim() || 'none' }}</p>
+	</div>
+
+	<div class="song-strap-footer">
+		<div class="song-strap-info">
+			<p class="song-strap-info-album"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
+				song.album?.trim() || 'none' }}
+			</p>
+		</div>
+
+	</div>
+
+	<p>{{ getDurationStringFromSeconds(song.duration) }}</p>
+
+	<button mat-icon-button class="favorite-icon">
+		<mat-icon fontIcon="favorite_outline"></mat-icon>
+		<!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
+	</button>
+</mat-card>

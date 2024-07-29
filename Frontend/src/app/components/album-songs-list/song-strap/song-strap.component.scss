@@ -1,0 +1,99 @@
+.song-strap {
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	align-items: center;
+	justify-content: space-between;
+	height: var(--height-song-card);
+	width: var(--width-songs-section);
+	border: 2px black solid;
+	border-bottom: none;
+	border-radius: 35px 0 0 35px;
+	transition-duration: .15s;
+	background: linear-gradient(to bottom, lavender, transparent);
+
+	& * {
+		margin: 0 10px 0 10px;
+	}
+
+	&-header {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 8px 16px;
+		border-radius: calc(var(--border-radius-default) - 1px) calc(var(--border-radius-default) - 1px) 0 0;
+		overflow: hidden;
+		height: var(--header-section-height);
+		color: var(--primary-color);
+
+		&-title {
+			display: flex;
+			align-items: center;
+			max-width: calc(var(--width-of-container) - 70px);
+			font-weight: 500;
+			font-size: 1.5em;
+		}
+	}
+
+	&-play-button {
+		opacity: 50%;
+		transform: translateX(-8px);
+		transition: opacity 0.15s ease-in-out;
+		height: calc(var(--height-song-card) - 5px);
+		aspect-ratio: 1 / 1;
+		border-radius: 50% 0 0 50%;
+		color: var(--secondary-color);
+		background-color: rgba(42, 42, 42, 0.407);
+		border: none;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&-footer {
+		color: var(--primary-color);
+
+		&-album {
+			font-style: italic;
+			font-size: 1.2em;
+			font-weight: lighter;
+		}
+
+	}
+
+	* {
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	.favorite-icon {
+		opacity: 50%;
+		transition: opacity 0.15s ease-in-out;
+		height: calc(var(--height-song-card) - 5px);
+		aspect-ratio: 1 / 1;
+		border-radius: 50% 0 0 50%;
+		transform: translateX(9px);
+		color: var(--secondary-color);
+		background-color: rgba(42, 42, 42, 0.407);
+		border: none;
+		cursor: pointer;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&:hover {
+		background: linear-gradient(to bottom, rgb(222, 222, 255), transparent);
+	}
+
+	.underline-on-hover {
+		&:hover {
+			cursor: pointer;
+			text-decoration: underline;
+		}
+	}
+}
