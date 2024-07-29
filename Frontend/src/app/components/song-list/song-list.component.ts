@@ -25,8 +25,8 @@ export class SongListComponent implements OnInit {
 
   getSongsFromLocal(): void {
     this.musicService.getMusicFiles().subscribe({
-      next: (data) => {
-        this.songs = data.map(song => {
+      next: (songs: Song[]) => {
+        this.songs = songs.map(song => {
           song.imageUrl = Utils.getImageUrlOrDefault(
             song.imageData != null ? song.imageData.toString() : null, DEFAULT_SONG_IMAGE_PATH);
 

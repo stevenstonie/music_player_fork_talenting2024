@@ -1,21 +1,38 @@
-<!-- <div class="album-details" *ngIf="album">
-	<img [src]="album?.coverImage" alt="{{ album?.albumName }}">
-	<div class="album-info">
-		<h1>{{ album?.albumName }}</h1>
-		<h2>{{ album?.artistName }}</h2>
-		<p>Release Date: {{ album?.releaseDate }}</p>
-	</div>
+<div id="album-window">
+  <section id="album-window-header" *ngIf="songs[0]">
+    <h2>{{songs[0].album}}</h2>
+    <img [src]="songs[0].imageUrl" (error)="handleImageError(songs[0])" alt="album image" />
+    <p>by: {{songs[0].artist}}</p>
+  </section>
+
+  <ul *ngFor="let song of songs; let i = index">
+    <mat-card class="song-strap">
+      <button class="song-strap-play-button" (click)="playSong(song)">
+        <mat-icon id="play-arrow" fontIcon="play_arrow"></mat-icon>
+      </button>
+
+      <div class="song-strap-header">
+        <h2 class="song-strap-header-title">{{ song.title?.trim() || 'none'}}</h2>
+        <p class="song-strap-info-artist">{{ song.artist?.trim() || 'none' }}</p>
+      </div>
+
+      <div class="song-strap-footer">
+        <div class="song-strap-info">
+          <p class="song-strap-info-album"><mat-icon style="vertical-align: middle;">album</mat-icon>{{
+            song.album?.trim() || 'none' }}
+          </p>
+        </div>
+
+      </div>
+
+      <p>{{ getDurationStringFromSeconds(song.duration) }}</p>
+
+      <button mat-icon-button class="favorite-icon">
+        <mat-icon fontIcon="favorite_outline"></mat-icon>
+        <!-- <mat-icon *ngIf="song.isLiked" fontIcon="favorite"></mat-icon> -->
+      </button>
+    </mat-card>
+  </ul>
 </div>
 
-<div class="song-table" *ngIf="album?.songs.length">
-	<div class="table-header">
-		<div class="header-item">#</div>
-		<div class="header-item">Title</div>
-		<div class="header-item">Duration</div>
-	</div>
-	<div *ngFor="let song of album.songs; let i = index" class="table-row" (click)="playSong(song.songId)">
-		<div class="row-item">{{ i + 1 }}</div>
-		<div class="row-item">{{ song.songName }}</div>
-		<div class="row-item">{{ song.duration }}</div>
-	</div>
-</div> -->
+<app-playbar></app-playbar>

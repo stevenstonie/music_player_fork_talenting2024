@@ -10,7 +10,7 @@ namespace backend.services
         private readonly string _musicPath;
         private readonly string _extension = "MP3";
         private readonly List<Song> _cachedSongs;
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
 
         public MusicService(string musicPath)
         {
@@ -33,8 +33,8 @@ namespace backend.services
             {
                 if (Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase))
                 {
-                    Track track = new Track(file);
-                    FileInfo fileInfo = new FileInfo(file);
+                    Track track = new(file);
+                    FileInfo fileInfo = new(file);
                     PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
                     double rating = Math.Round(_random.NextDouble() * 5, 2);
 
@@ -97,9 +97,9 @@ namespace backend.services
             return _cachedSongs
                 .Where(song => song.Artist != null && song.Artist.Equals(artistName, StringComparison.OrdinalIgnoreCase))
                 .Select(song => song.Album)
-                .Where(album => album != null) 
-                .Distinct() 
-                .Cast<string>(); 
+                .Where(album => album != null)
+                .Distinct()
+                .Cast<string>();
         }
     }
 }

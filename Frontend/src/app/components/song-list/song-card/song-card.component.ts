@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { Song } from '../../../models/song';
 import { MusicService } from '../../../services/music.service';
 import { Utils } from '../../utils/utils';
-import { DEFAULT_SONG_IMAGE_PATH } from '../../../app.config';
 import { Router } from '@angular/router';
 
 @Component({
@@ -19,22 +18,23 @@ import { Router } from '@angular/router';
 export class SongCardComponent {
   @Input() song!: Song;
 
-  constructor(private musicService: MusicService, private router: Router) { }
+  constructor(private musicService: MusicService) { }
 
   playSong(): void {
     console.log('playing song: ', this.song);
     this.musicService.setCurrentSong(this.song);
   }
 
-  handleImageError(): void {
-    this.song.imageUrl = Utils.getImageUrlOrDefault(null, DEFAULT_SONG_IMAGE_PATH);
-  }
-
   navigateToAlbumWindow(albumName: string): void {
     if (albumName == null) {
+      alert('add a dialog window here');
       return;
     }
 
-    this.router.navigate(['/album', albumName]);
+    window.open(`/album/${albumName}`, '_blank');
+  }
+
+  handleImageError(song: Song): void {
+    song.imageUrl = Utils.handleImageError(song.imageUrl!);
   }
 }

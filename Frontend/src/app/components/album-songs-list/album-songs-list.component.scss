@@ -1,136 +1,116 @@
-.album-details {
+#album-window {
 	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: left;
+	--width-album-section: 20%;
+	--width-songs-section: 70%;
+	--height-song-card: 70px;
 
-	img {
-		width: 150px;
-		height: 150px;
-		object-fit: cover;
-		border-radius: 8px;
-		margin-right: 20px;
-	}
-
-	.album-info {
-		h1 {
-			margin: 0;
-			font-size: 2em;
-		}
-
-		h2 {
-			margin: 5px 0;
-			font-size: 1.5em;
-			color: #666;
-		}
-
-		p {
-			margin: 0;
-			font-size: 1em;
-			color: #999;
-		}
-	}
-}
-
-.song-table {
-	width: 100%;
-	border-collapse: collapse;
-
-	.table-header {
-		display: flex;
-		background-color: #f7f7f7;
-		font-weight: bold;
-		padding: 10px 0;
-		border-bottom: 2px solid #ddd;
-
-		.header-item {
-			flex: 1;
-			padding: 5px 10px;
-			text-align: left;
-		}
-	}
-
-	.table-row {
-		display: flex;
-		padding: 10px 0;
-		border-bottom: 1px solid #ddd;
-		cursor: pointer;
-		transition: background-color 0.3s ease;
-
-		&:hover {
-			background-color: #f0f0f0;
-		}
-
-		.row-item {
-			flex: 1;
-			padding: 5px 10px;
-			text-align: left;
-		}
-	}
-}
-
-@media (max-width: 768px) {
-	.album-details {
-		flex-direction: column;
-		align-items: flex-start;
+	&-header {
+		width: var(--width-album-section);
+		position: absolute;
+		top: 10px;
+		right: 30px;
 
 		img {
 			width: 100%;
-			height: auto;
-			margin-bottom: 15px;
-		}
-
-		.album-info {
-			text-align: center;
-			width: 100%;
-
-			h1 {
-				font-size: 1.5em;
-			}
-
-			h2 {
-				font-size: 1.2em;
-			}
-
-			p {
-				font-size: 0.9em;
-			}
+			aspect-ratio: 1/1;
+			border-radius: 50%;
 		}
 	}
 
-	.song-table {
+	.song-strap {
+		display: flex;
+		flex-direction: row;
+		position: relative;
+		align-items: center;
+		height: var(--height-song-card);
+		width: var(--width-songs-section);
+		border: 2px black solid;
+		border-bottom: none;
+		border-radius: 35px 0 0 35px;
+		transition-duration: .15s;
+		background: linear-gradient(to bottom, lavender, transparent);
 
-		.table-header,
-		.table-row {
-			display: block;
+		& * {
+			margin: 0 10px 0 10px;
+		}
 
-			.header-item,
-			.row-item {
-				display: block;
-				text-align: right;
-				padding: 5px;
-				border-bottom: 1px solid #ddd;
+		&-header {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 8px 16px;
+			border-radius: calc(var(--border-radius-default) - 1px) calc(var(--border-radius-default) - 1px) 0 0;
+			overflow: hidden;
+			height: var(--header-section-height);
+			color: var(--primary-color);
+
+			&-title {
+				display: flex;
+				align-items: center;
+				max-width: calc(var(--width-of-container) - 70px);
+				font-weight: 500;
+				font-size: 1.5em;
+			}
+		}
+
+		&-play-button {
+			opacity: 50%;
+			transform: translateX(-8px);
+			transition: opacity 0.15s ease-in-out;
+			height: calc(var(--height-song-card) - 5px);
+			aspect-ratio: 1 / 1;
+			border-radius: 50%;
+			color: var(--secondary-color);
+			background-color: rgba(42, 42, 42, 0.407);
+			border: none;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&-footer {
+			color: var(--primary-color);
+
+			&-album {
+				font-style: italic;
+				font-size: 1.2em;
+				font-weight: lighter;
 			}
 
-			.header-item {
-				font-weight: bold;
-				text-align: left;
-			}
+		}
 
-			.row-item {
-				text-align: left;
-				padding-left: 50%;
-				position: relative;
-			}
+		* {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 
-			.row-item:before {
-				content: attr(data-label);
-				position: absolute;
-				left: 0;
-				width: 50%;
-				padding-left: 10px;
-				font-weight: bold;
-				text-align: left;
-				white-space: nowrap;
+		.favorite-icon {
+			position: absolute;
+			top: 0;
+			right: -20px;
+			opacity: 0;
+		}
+
+		&:hover {
+			background: linear-gradient(to bottom, rgb(223, 223, 255), transparent);
+
+			.favorite-icon {
+				opacity: 100%;
+				transform: translateX(-50%);
+				transition-duration: .15s;
+			}
+		}
+
+		.underline-on-hover {
+			&:hover {
+				cursor: pointer;
+				text-decoration: underline;
 			}
 		}
 	}
