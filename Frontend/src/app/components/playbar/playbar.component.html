@@ -12,8 +12,10 @@
       <p class="playbar-song-info_text_artist">{{ currentSong.artist }}</p>
     </div>
 
-    <div class="playbar-song-info_favorite">
-      <mat-icon fontIcon="favorite_outline"></mat-icon>
+    <div class="playbar-song-info_favorite" (click)="toggleFavorite()">
+      <mat-icon
+        [fontIcon]="favoriteSong ? 'favorite' : 'favorite_outline'"
+      ></mat-icon>
     </div>
   </div>
 
@@ -51,8 +53,9 @@
         mat-icon-button
         (click)="playPauseSong()"
       >
-        <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
-        <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
+        <mat-icon
+          [fontIcon]="audio?.paused ? 'play_arrow' : 'pause'"
+        ></mat-icon>
       </button>
       <button
         class="playbar-controls-buttons-next"

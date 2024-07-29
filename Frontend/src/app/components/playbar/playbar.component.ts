@@ -22,6 +22,7 @@ export class PlaybarComponent implements OnInit {
   currentSong!: Song;
   isUserChangingRange: boolean = false;
   isBrowser: boolean;
+  favoriteSong: boolean = false;
 
   constructor(
     private musicService: MusicService,
@@ -81,6 +82,10 @@ export class PlaybarComponent implements OnInit {
         this.audio.pause();
       }
     }
+  }
+
+  toggleFavorite(): void {
+    this.favoriteSong = !this.favoriteSong;
   }
 
   playNextSong(): void {

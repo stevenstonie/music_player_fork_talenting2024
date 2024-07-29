@@ -9,7 +9,7 @@
   height: auto;
   background-color: rgba(lavender, 0.9);
   box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  z-index: 5;
 
   .playbar-song-info {
     width: 25%;
@@ -20,6 +20,8 @@
     .playbar-song-info_img {
       height: 80px;
       aspect-ratio: 1 / 1;
+      margin: 10px;
+      border-radius: 10px;
     }
 
     .playbar-song-info_text {
@@ -58,7 +60,7 @@
       align-items: center;
       margin-right: 100px;
 
-      input[type='range'] {
+      input[type="range"] {
         accent-color: var(--secondary-color);
       }
 

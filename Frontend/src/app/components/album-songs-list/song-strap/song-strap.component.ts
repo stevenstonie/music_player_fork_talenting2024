@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, MatCardModule, MatIconModule],
   templateUrl: './song-strap.component.html',
-  styleUrl: './song-strap.component.scss'
+  styleUrl: './song-strap.component.scss',
 })
 export class SongStrapComponent {
   @Input() song!: Song;
@@ -23,7 +23,6 @@ export class SongStrapComponent {
   }
 
   playSong(): void {
-    console.log('playing song: ', this.song);
     this.musicService.setCurrentSong(this.song);
   }
 

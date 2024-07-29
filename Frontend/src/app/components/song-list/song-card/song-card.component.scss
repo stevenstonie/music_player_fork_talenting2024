@@ -44,21 +44,20 @@
 		border-radius: 50%;
 	}
 
-	&-play-button {
-		position: absolute;
-		top: var(--header-section-height);
-		left: calc((100% - var(--image-size)) / 2);
-		opacity: 0;
-		transition: opacity 0.15s ease-in-out;
-		width: var(--image-size);
-		aspect-ratio: 1 / 1;
-		border-radius: 50%;
-		z-index: 10;
-		color: var(--accent-color);
-		background-color: rgba(42, 42, 42, 0.407);
-		// poate afli si cum sa faci un gradient in jurul astuia cu culorile marginilor de poza
-		border: none;
-		cursor: pointer;
+  &-play-button {
+    position: absolute;
+    top: var(--header-section-height);
+    left: calc((100% - var(--image-size)) / 2);
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+    width: var(--image-size);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    z-index: 10;
+    color: var(--accent-color);
+    background-color: rgba(42, 42, 42, 0.407);
+    border: none;
+    cursor: pointer;
 
 		&:hover {
 			opacity: 1;
@@ -101,10 +100,23 @@
 	&:hover {
 		background: linear-gradient(to bottom, rgb(223, 223, 255), transparent);
 
-		.favorite-icon {
-			opacity: 100%;
-			transform: translateX(-50%);
-			transition-duration: .15s;
-		}
-	}
+    .favorite-icon {
+      opacity: 100%;
+      transform: translateX(-50%);
+      transition-duration: 0.15s;
+    }
+  }
+
+  .underline-on-hover {
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+
+  &.current {
+    border-color: #2f0954;
+    background: linear-gradient(to bottom, #ffe6e6, #fff);
+    box-shadow: 0 0 10px #4e1c81;
+  }
 }
