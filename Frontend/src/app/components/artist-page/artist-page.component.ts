@@ -4,11 +4,12 @@ import { Song } from '../../models/song';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SongStrapComponent } from "../song-strap/song-strap.component";
 import { CommonModule } from '@angular/common';
+import { HomeButtonComponent } from "../home-button/home-button.component";
 
 @Component({
   selector: 'app-artist-page',
   standalone: true,
-  imports: [CommonModule, SongStrapComponent],
+  imports: [CommonModule, SongStrapComponent, HomeButtonComponent],
   templateUrl: './artist-page.component.html',
   styleUrl: './artist-page.component.scss'
 })

@@ -2,8 +2,9 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: left;
-	--width-album-section: 20%;
-	--width-songs-section: 70%;
+	margin-top: 50px;
+	--width-album-section: 20vw;
+	--width-songs-section: 70vw;
 	--height-song-strap: 70px;
 
 	&-header {

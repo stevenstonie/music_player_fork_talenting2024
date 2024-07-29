@@ -8,12 +8,13 @@ import { CommonModule } from '@angular/common';
 import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
 import { PlaybarComponent } from "../playbar/playbar.component";
 import { SongStrapComponent } from "../song-strap/song-strap.component";
+import { HomeButtonComponent } from "../home-button/home-button.component";
 
 
 @Component({
   selector: 'app-album-page',
   standalone: true,
-  imports: [CommonModule, MatIconModule, PlaybarComponent, SongStrapComponent],
+  imports: [CommonModule, MatIconModule, PlaybarComponent, SongStrapComponent, HomeButtonComponent],
   templateUrl: './album-page.component.html',
   styleUrl: './album-page.component.scss'
 })

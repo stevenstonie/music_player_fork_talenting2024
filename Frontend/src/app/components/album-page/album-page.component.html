@@ -1,3 +1,5 @@
+<app-home-button></app-home-button>
+
 <div id="album-window">
 	<section id="album-window-header" *ngIf="songs[0]">
 	  <h1 style="font-size: xx-large;">{{songs[0].album}}</h1>
@@ -9,5 +11,3 @@
 	  <app-song-strap [song]="song"></app-song-strap>
 	</ul>
   </div>
-  
-  <app-playbar></app-playbar>
