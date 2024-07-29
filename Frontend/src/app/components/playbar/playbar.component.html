@@ -41,6 +41,7 @@
       <button
         class="playbar-controls-buttons_previous no_hover_effect"
         mat-icon-button
+        (click)="playPreviousSong()"
       >
         <mat-icon fontIcon="skip_previous"></mat-icon>
       </button>
@@ -52,7 +53,11 @@
         <mat-icon *ngIf="audio?.paused" fontIcon="play_arrow"></mat-icon>
         <mat-icon *ngIf="!audio?.paused" fontIcon="pause"></mat-icon>
       </button>
-      <button class="playbar-controls-buttons-next" mat-icon-button>
+      <button
+        class="playbar-controls-buttons-next"
+        mat-icon-button
+        (click)="playNextSong()"
+      >
         <mat-icon fontIcon="skip_next"></mat-icon>
       </button>
     </div>

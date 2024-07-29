@@ -1,4 +1,4 @@
-<div class="song-card">
+<div class="song-card" [class.current]="(currentSong$ | async)?.title === song.title">
 	<section class="song-card-header">
 		<span>
 			<p class="song-card-header-title underline-on-hover" (click)="navigateToAlbumWindow(song.album!)">{{
@@ -14,7 +14,7 @@
 	</section>
 
 	<!-- add directive logic for this button to make it visible if the song is currently playing -->
-	<button class="song-card-play-button" (click)="playSong()">
+	<button *ngIf="(currentSong$ | async)?.title !== song.title" class="song-card-play-button" (click)="playSong()">
 		<mat-icon fontIcon="play_arrow" id="play-arrow"></mat-icon>
 	</button>
 	<img mat-card-image [src]="song.imageUrl" (error)="handleImageError(song)" alt="song image" />

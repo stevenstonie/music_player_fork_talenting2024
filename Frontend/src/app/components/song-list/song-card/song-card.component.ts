@@ -7,6 +7,7 @@ import { Song } from '../../../models/song';
 import { MusicService } from '../../../services/music.service';
 import { Utils } from '../../utils/utils';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-song-card',
@@ -17,8 +18,11 @@ import { Router } from '@angular/router';
 })
 export class SongCardComponent {
   @Input() song!: Song;
+  currentSong$: Observable<Song | null>;
 
-  constructor(private musicService: MusicService) { }
+  constructor(private musicService: MusicService, private router: Router) {
+    this.currentSong$ = this.musicService.currentSong$;
+  }
 
   playSong(): void {
     console.log('playing song: ', this.song);

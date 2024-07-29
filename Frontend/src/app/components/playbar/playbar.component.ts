@@ -45,6 +45,8 @@ export class PlaybarComponent implements OnInit {
       });
     }
 
+    this.musicService.loadSongs();
+
     this.musicService.currentSong$.subscribe((song) => {
       if (song) {
         this.currentSong = song;
@@ -78,6 +80,14 @@ export class PlaybarComponent implements OnInit {
         this.audio.pause();
       }
     }
+  }
+
+  playNextSong(): void {
+    this.musicService.setNextSong();
+  }
+
+  playPreviousSong(): void {
+    this.musicService.setPreviousSong();
   }
 
   onRangeInput(event: Event): void {

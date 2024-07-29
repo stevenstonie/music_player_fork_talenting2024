@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { Utils } from '../utils/utils';
 import { CommonModule } from '@angular/common';
-import { SafeUrl } from '@angular/platform-browser';
 import { DEFAULT_SONG_IMAGE_PATH } from '../../app.config';
 import { PlaybarComponent } from "../playbar/playbar.component";
 import { SongStrapComponent } from "./song-strap/song-strap.component";
