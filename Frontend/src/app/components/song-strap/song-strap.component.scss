@@ -1,16 +1,16 @@
 .song-strap {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--height-song-strap);
-  width: var(--width-songs-section);
-  border: 2px black solid;
-  border-bottom: none;
-  border-radius: 35px 0 0 35px;
-  transition-duration: 0.15s;
-  background: linear-gradient(to bottom, lavender, transparent);
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	align-items: center;
+	justify-content: space-between;
+	height: var(--height-song-strap);
+	width: var(--width-songs-section);
+	border: 2px black solid;
+	border-bottom: none;
+	border-radius: 35px 0 0 35px;
+	transition-duration: 0.15s;
+	background: linear-gradient(to bottom, lavender, transparent);
 
 	& * {
 		margin: 0 10px;
@@ -22,25 +22,24 @@
 		overflow: hidden;
 	}
 
-  &-header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 8px 16px;
-    border-radius: calc(var(--border-radius-default) - 1px)
-      calc(var(--border-radius-default) - 1px) 0 0;
-    overflow: hidden;
-    height: var(--header-section-height);
-    color: var(--primary-color);
+	&-header {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 8px 16px;
+		border-radius: calc(var(--border-radius-default) - 1px) calc(var(--border-radius-default) - 1px) 0 0;
+		overflow: hidden;
+		height: var(--header-section-height);
+		color: var(--primary-color);
 
-    &-title {
-      display: flex;
-      align-items: center;
-      max-width: calc(var(--width-of-container) - 70px);
-      font-weight: 500;
-      font-size: 1.5em;
-    }
-  }
+		&-title {
+			display: flex;
+			align-items: center;
+			max-width: calc(var(--width-of-container) - 70px);
+			font-weight: 500;
+			font-size: 1.5em;
+		}
+	}
 
 	&-play-button {
 		transform: translateX(-8px);
@@ -76,13 +75,9 @@
 
 	@media screen and (max-width: 900px) {
 		width: 95%;
-	}
 
-	@media screen and (max-width: 600px) {
-		border-radius: 25px 0 0 25px;
-
-		.song-strap-info {
-			display: none;
+		* {
+			margin: 0 2px;
 		}
 
 		&-play-button {
@@ -92,14 +87,22 @@
 		.favorite-icon {
 			transform: translateX(0px);
 		}
+	}
+
+	@media screen and (max-width: 600px) {
+		border-radius: 25px 0 0 25px;
+
+		.song-strap {
+
+			&-info,
+			&-rating {
+				display: none;
+			}
+		}
 
 		button {
 			width: 40px;
 			border-radius: 23px 0 0 23px;
-		}
-
-		* {
-			margin: 0 2px;
 		}
 	}
 }
