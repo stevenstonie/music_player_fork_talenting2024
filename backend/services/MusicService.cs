@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.services
 {
-    public class MusicService
+    public class MusicService : IMusicService
     {
         private readonly string _musicPath;
         private readonly string _extension = "MP3";
@@ -22,36 +22,6 @@ namespace backend.services
             }
 
             _cachedSongs = InitializeCache();
-        }
-
-        private List<Song> InitializeCache()
-        {
-            string[] files = Directory.GetFiles(_musicPath);
-            var songs = new List<Song>();
-
-            foreach (string file in files.Where(file => Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase)))
-            {
-                Track track = new(file);
-                FileInfo fileInfo = new(file);
-                PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
-                double rating = Math.Round(_random.NextDouble() * 5, 2);
-
-                var song = new Song
-                {
-                    FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
-                    Title = track.Title,
-                    CreationDate = fileInfo.CreationTime,
-                    Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
-                    Rating = rating,
-                    Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
-                    Duration = track.Duration,
-                    ImageData = imageBinary?.PictureData
-                };
-
-                songs.Add(song);
-            }
-
-            return songs;
         }
 
         public IEnumerable<Song> GetSongs()
@@ -97,6 +67,38 @@ namespace backend.services
                 .Where(album => album != null)
                 .Distinct()
                 .Cast<string>();
+        }
+
+        // ----------------------------------------------------------------------------
+
+        private List<Song> InitializeCache()
+        {
+            string[] files = Directory.GetFiles(_musicPath);
+            var songs = new List<Song>();
+
+            foreach (string file in files.Where(file => Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase)))
+            {
+                Track track = new(file);
+                FileInfo fileInfo = new(file);
+                PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
+                double rating = Math.Round(_random.NextDouble() * 5, 2);
+
+                var song = new Song
+                {
+                    FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
+                    Title = track.Title,
+                    CreationDate = fileInfo.CreationTime,
+                    Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
+                    Rating = rating,
+                    Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
+                    Duration = track.Duration,
+                    ImageData = imageBinary?.PictureData
+                };
+
+                songs.Add(song);
+            }
+
+            return songs;
         }
     }
 }

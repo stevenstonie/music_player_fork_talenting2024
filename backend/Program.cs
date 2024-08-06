@@ -52,7 +52,7 @@ namespace backend
 				});
 
 			builder.Services.AddControllers();
-			builder.Services.AddTransient<MusicService>(provider => new MusicService("./../music"));
+			builder.Services.AddTransient(provider => new MusicService("./../music"));
 
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
