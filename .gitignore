@@ -1,3 +1,5 @@
 # the "assets" directory
 music
 .vscode
+*/obj
+*/bin

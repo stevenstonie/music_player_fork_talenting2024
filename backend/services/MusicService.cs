@@ -29,29 +29,26 @@ namespace backend.services
             string[] files = Directory.GetFiles(_musicPath);
             var songs = new List<Song>();
 
-            foreach (var file in files)
+            foreach (string file in files.Where(file => Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase)))
             {
-                if (Path.GetExtension(file).Equals($".{_extension}", StringComparison.OrdinalIgnoreCase))
+                Track track = new(file);
+                FileInfo fileInfo = new(file);
+                PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
+                double rating = Math.Round(_random.NextDouble() * 5, 2);
+
+                var song = new Song
                 {
-                    Track track = new(file);
-                    FileInfo fileInfo = new(file);
-                    PictureInfo? imageBinary = track.EmbeddedPictures.FirstOrDefault();
-                    double rating = Math.Round(_random.NextDouble() * 5, 2);
+                    FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
+                    Title = track.Title,
+                    CreationDate = fileInfo.CreationTime,
+                    Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
+                    Rating = rating,
+                    Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
+                    Duration = track.Duration,
+                    ImageData = imageBinary?.PictureData
+                };
 
-                    var song = new Song
-                    {
-                        FileName = Path.GetFileNameWithoutExtension(fileInfo.Name),
-                        Title = track.Title,
-                        CreationDate = fileInfo.CreationTime,
-                        Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
-                        Rating = rating,
-                        Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
-                        Duration = track.Duration,
-                        ImageData = imageBinary?.PictureData
-                    };
-
-                    songs.Add(song);
-                }
+                songs.Add(song);
             }
 
             return songs;
@@ -71,7 +68,7 @@ namespace backend.services
                 throw new ResourceNotFoundCustomException("Song not found.");
             }
 
-            FileStream stream = new FileStream(songPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
+            FileStream stream = new(songPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
 
             return new FileStreamResult(stream, $"audio/{_extension}")
             {
