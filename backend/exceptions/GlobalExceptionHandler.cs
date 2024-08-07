@@ -23,27 +23,32 @@ namespace backend.exceptions
 
 		private static Task HandleExceptionAsync(HttpContext context, Exception exception)
 		{
-			ResponsePayload result;
-
-			switch (exception)
-			{
-				case ResourceNotFoundCustomException:
-					{
-						result = new((int)HttpStatusCode.NotFound, exception.Message);
-						break;
-					}
-				default:
-					{
-						result = new((int)HttpStatusCode.InternalServerError, exception.Message);
-						break;
-					}
-			}
+			ResponsePayload result = GetPayloadFromException(exception);
 
 			var response = context.Response;
 			response.ContentType = "application/json";
 			response.StatusCode = result.Status;
 
 			return response.WriteAsync(JsonSerializer.Serialize(result));
+		}
+
+		private static ResponsePayload GetPayloadFromException(Exception exception)
+		{
+			switch (exception)
+			{
+				case ResourceNotFoundCustomException:
+					{
+						return new((int)HttpStatusCode.NotFound, exception.Message);
+					}
+				case ExtensionNotSupportedCustomException:
+					{
+						return new((int)HttpStatusCode.UnsupportedMediaType, exception.Message);
+					}
+				default:
+					{
+						return new((int)HttpStatusCode.InternalServerError, exception.Message);
+					}
+			}
 		}
 	}
 }

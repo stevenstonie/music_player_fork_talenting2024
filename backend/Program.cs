@@ -1,5 +1,6 @@
 using backend.exceptions;
 using backend.services;
+using backend.services.interfaces;
 
 namespace backend
 {
@@ -52,7 +53,11 @@ namespace backend
 				});
 
 			builder.Services.AddControllers();
-			builder.Services.AddTransient(provider => new MusicService("./../music"));
+			builder.Services.AddTransient<IFileService>(provider => new FileService("./../music"));
+			builder.Services.AddSingleton<ICacheService>(provider => new CacheService("./../music"));
+			builder.Services.AddTransient<IMusicService, MusicService>();
+			builder.Services.AddTransient<IAlbumService, AlbumService>();
+			builder.Services.AddTransient<IArtistService, ArtistService>();
 
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
