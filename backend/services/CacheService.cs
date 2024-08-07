@@ -1,13 +1,15 @@
 using ATL;
+using backend.config;
 using backend.models;
 using backend.services.interfaces;
+using Microsoft.Extensions.Options;
 
 namespace backend.services
 {
-	public class CacheService (string musicPath) : ICacheService
+	public class CacheService (IOptions<MusicConfig> musicConfig) : ICacheService
 	{
-		private readonly string _musicPath = musicPath;
-		private readonly string _extension = "MP3";
+		private readonly string _musicPath = musicConfig.Value.Path;
+		private readonly string _extension = musicConfig.Value.Extension;
 		private readonly Random _random = new();
 
 		public List<Song> GetCachedSongs()

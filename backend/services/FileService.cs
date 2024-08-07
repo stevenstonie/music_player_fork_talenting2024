@@ -1,11 +1,13 @@
+using backend.config;
 using backend.services.interfaces;
+using Microsoft.Extensions.Options;
 
 namespace backend.services
 {
-	public class FileService(string musicPath) : IFileService
+	public class FileService(IOptions<MusicConfig> musicConfig) : IFileService
 	{
-		private readonly string _musicPath = musicPath;
-		private readonly string _extension = "MP3";
+		private readonly string _musicPath = musicConfig.Value.Path;
+		private readonly string _extension = musicConfig.Value.Extension;
 
 		public string GetPath(string fileName)
 		{

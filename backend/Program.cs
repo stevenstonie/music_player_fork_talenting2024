@@ -1,3 +1,4 @@
+using backend.config;
 using backend.exceptions;
 using backend.services;
 using backend.services.interfaces;
@@ -52,9 +53,11 @@ namespace backend
 					});
 				});
 
+			builder.Services.Configure<MusicConfig>(builder.Configuration.GetSection("Music"));
+
 			builder.Services.AddControllers();
-			builder.Services.AddTransient<IFileService>(provider => new FileService("./../music"));
-			builder.Services.AddSingleton<ICacheService>(provider => new CacheService("./../music"));
+			builder.Services.AddScoped<IFileService, FileService>();
+			builder.Services.AddScoped<ICacheService, CacheService>();
 			builder.Services.AddTransient<IMusicService, MusicService>();
 			builder.Services.AddTransient<IAlbumService, AlbumService>();
 			builder.Services.AddTransient<IArtistService, ArtistService>();
