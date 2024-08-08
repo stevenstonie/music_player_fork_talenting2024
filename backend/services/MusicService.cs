@@ -29,7 +29,7 @@ namespace backend.services
 
 			if (!_fileService.IsExtensionSupported(Path.GetExtension(songPath)))
 			{
-				throw new ExtensionNotSupportedCustomException("Extension not yet supported.");
+				throw new ExtensionNotSupportedCustomException($"Extension not yet supported. ({Path.GetExtension(songPath)})");
 			}
 
 			FileStream stream = new(songPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);

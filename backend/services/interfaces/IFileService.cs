@@ -5,6 +5,8 @@ namespace backend.services.interfaces
 
 		string GetPath(string fileName);
 
+		string[] GetFiles();
+
 		bool IsExtensionSupported(string extension);
 
 		FileStream GetFileStream(string fileName);

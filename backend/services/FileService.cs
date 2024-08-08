@@ -14,6 +14,13 @@ namespace backend.services
 			return Path.Combine(_musicPath, fileName);
 		}
 
+		public string[] GetFiles()
+		{
+			if (!Directory.Exists(_musicPath)) Directory.CreateDirectory(_musicPath);
+
+			return Directory.GetFiles(_musicPath);
+		}
+
 		public bool Exists(string fileName)
 		{
 			return File.Exists(GetPath(fileName));
@@ -22,7 +29,7 @@ namespace backend.services
 		public bool IsExtensionSupported(string extension)
 		{
 			if (string.IsNullOrEmpty(extension)) return false;
-			
+
 			return extension.Equals(_extension, StringComparison.OrdinalIgnoreCase);
 		}
 

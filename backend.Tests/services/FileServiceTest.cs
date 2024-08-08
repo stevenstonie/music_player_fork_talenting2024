@@ -29,7 +29,7 @@ namespace backend.Tests.services
 		}
 
 		[Fact]
-		void Exists_ShouldReturnTrue_WhenFileExists()
+		public void Exists_ShouldReturnTrue_WhenFileExists()
 		{
 			string fileName = "existing_song.mp3";
 
@@ -50,13 +50,13 @@ namespace backend.Tests.services
 		[InlineData("mp3")]
 		[InlineData("mp4")]
 		[InlineData("m4a")]
-		void IsExtensionSupported_AllShouldReturnFalse(string extension)
+		public void IsExtensionSupported_AllShouldReturnFalse(string extension)
 		{
 			Assert.False(_fileService.IsExtensionSupported(extension));
 		}
 
 		[Fact]
-		void IsExtensionSupported_ShouldReturnTrue()
+		public void IsExtensionSupported_ShouldReturnTrue()
 		{
 			Assert.True(_fileService.IsExtensionSupported(_testExtension));
 		}
