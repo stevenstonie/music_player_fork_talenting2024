@@ -1,8 +1,9 @@
-using backend.exceptions;
+using backend.config;
 using backend.models;
 using backend.services;
 using backend.services.interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Moq;
 
 namespace backend.Tests.services

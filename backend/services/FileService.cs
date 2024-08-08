@@ -21,6 +21,8 @@ namespace backend.services
 
 		public bool IsExtensionSupported(string extension)
 		{
+			if (string.IsNullOrEmpty(extension)) return false;
+			
 			return extension.Equals(_extension, StringComparison.OrdinalIgnoreCase);
 		}
 
