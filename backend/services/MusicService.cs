@@ -22,7 +22,7 @@ namespace backend.services
 		{
 			string songPath = _fileService.GetPath(fileName);
 
-			if (!File.Exists(songPath))
+			if (!_fileService.Exists(songPath))
 			{
 				throw new ResourceNotFoundCustomException("Song not found.");
 			}

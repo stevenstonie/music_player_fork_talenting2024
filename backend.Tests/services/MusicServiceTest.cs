@@ -1,4 +1,5 @@
 using backend.config;
+using backend.exceptions;
 using backend.models;
 using backend.services;
 using backend.services.interfaces;
@@ -42,6 +43,31 @@ namespace backend.Tests.services
 			Assert.Equal(2, songs.Count());
 		}
 
+		[Fact]
+		public void GetSongs_ShouldReturnAnEmptyList()
+		{
+			_cacheServiceMock.Setup(CacheService => CacheService.GetCachedSongs()).Returns([]);
+
+			IEnumerable<Song> songs = _musicService.GetSongs();
+
+			Assert.Empty(songs);
+		}
+
+		[Fact]
+		public void StreamSong_ShouldThrowException_WhenFileNotFound()
+		{
+			_fileServiceMock.Setup(fileService => fileService.GetPath(It.IsAny<string>())).Throws(new ResourceNotFoundCustomException("Message to indicate that the file was not found."));
+
+			Assert.Throws<ResourceNotFoundCustomException>(() => _musicService.StreamSong("random path to an absent file."));
+		}
+
+		[Fact]
+		public void StreamSong_ShouldThrowException_WhenFileIsNotSupported(){
+			_fileServiceMock.Setup(fileService => fileService.Exists(It.IsAny<string>())).Returns(true);
+			_fileServiceMock.Setup(fileService => fileService.IsExtensionSupported(It.IsAny<string>())).Throws(new ExtensionNotSupportedCustomException("Message say something something a file is not supported."));
+
+			Assert.Throws<ExtensionNotSupportedCustomException>(() => _musicService.StreamSong("message to indicate that the file is not supported."));
+		}
 		// ---------------------------------------------------------------
 
 		private List<Song> ReturnTestSongs()
