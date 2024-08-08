@@ -10,35 +10,57 @@ namespace backend.Tests.services
 {
 	public class MusicServiceTest
 	{
-		[Fact]
-		public void GetSongs_ShouldReturnAllSongs()
+		private readonly MusicService _musicService;
+		private readonly string _testPath = "test_path";
+		private readonly string _testExtension = ".test_extension";
+		private readonly Mock<IFileService> _fileServiceMock;
+		private readonly Mock<ICacheService> _cacheServiceMock;
+		private readonly Mock<IOptions<MusicConfig>> _musicConfigMock;
+
+		public MusicServiceTest()
 		{
-			Mock<IMusicService> musicServiceMock = new();
-			musicServiceMock.Setup(musicService => musicService.GetSongs()).Returns(new List<Song>()
+			_fileServiceMock = new();
+			_cacheServiceMock = new();
+			_musicConfigMock = new();
+
+			_musicConfigMock.Setup(config => config.Value).Returns(new MusicConfig
 			{
-				new() { FileName = "song1.mp3", Title = "Test song 1", CreationDate = DateTime.Now, Album = "album1", Rating = 5, Artist = "artist1", Duration = 50, ImageData = [] },
-				new() { FileName = "song2.mp3", Title = "Test song 2", CreationDate = DateTime.Now, Album = "album2", Rating = 3, Artist = "artist2", Duration = 60, ImageData = [] },
-			}.AsEnumerable());
+				Path = _testPath,
+				Extension = _testExtension
+			});
+			_cacheServiceMock.Setup(cacheService => cacheService.GetCachedSongs()).Returns(ReturnTestSongs());
 
-			IEnumerable<Song> songs = musicServiceMock.Object.GetSongs();
-
-			Assert.NotNull(songs);
-			Assert.Equal(2, songs.Count());
-			Assert.Equal("song1.mp3", songs.ElementAt(0).FileName);
-			Assert.Equal(60, songs.ElementAt(1).Duration);
+			_musicService = new(_fileServiceMock.Object, _cacheServiceMock.Object, _musicConfigMock.Object);
 		}
 
 		[Fact]
-		public void StreamSong_ShouldReturnStream()
+		public void GetSongs_ShouldReturnAllSongs()
 		{
-			Mock<IMusicService> musicServiceMock = new();
-			FileStreamResult fileStreamResult = new(new MemoryStream(), "audio/mpeg");
-			musicServiceMock.Setup(musicService => musicService.StreamSong(It.IsAny<string>())).Returns(fileStreamResult);
+			IEnumerable<Song> songs = _musicService.GetSongs();
 
-			IActionResult streamedSong = musicServiceMock.Object.StreamSong("song1.mpeg");
+			Assert.NotNull(songs);
+			Assert.Equal(2, songs.Count());
+		}
 
-			Assert.IsType<FileStreamResult>(streamedSong);
-			musicServiceMock.Verify(musicService => musicService.StreamSong(It.IsAny<string>()), Times.Once);
+		// ---------------------------------------------------------------
+
+		private List<Song> ReturnTestSongs()
+		{
+			string _testSongPath1 = $"{_testPath}/song1{_testExtension}";
+			string _testSongPath2 = $"{_testPath}/song2{_testExtension}";
+
+			return [
+				new Song
+				{
+					FileName = _testSongPath1,
+					Duration = 60
+				},
+				new Song
+				{
+					FileName = _testSongPath2,
+					Duration = 120
+				}
+			];
 		}
 	}
 }

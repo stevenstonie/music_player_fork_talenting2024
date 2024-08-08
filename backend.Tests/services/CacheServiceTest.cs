@@ -28,7 +28,7 @@ namespace backend.Tests.services
 				Extension = _testExtension
 			});
 			_fileServiceMock.Setup(fs => fs.GetFiles()).Returns(ReturnTestSongPaths());
-
+			
 			_cacheService = new(_musicConfigMock.Object, _fileServiceMock.Object);
 		}
 
@@ -47,7 +47,7 @@ namespace backend.Tests.services
 		}
 
 		[Fact]
-		public void GetCachedSongs()
+		public void GetCachedSongs_ShouldReturnSongs()
 		{
 			List<Song> songs = _cacheService.GetCachedSongs();
 
@@ -55,6 +55,17 @@ namespace backend.Tests.services
 			Assert.Equal(2, songs.Count);
 			Assert.Equal(ReturnTestSongPaths()[0], songs[0].FileName);
 			Assert.Equal(ReturnTestSongPaths()[1], songs[1].FileName);
+		}
+
+		[Fact]
+		public void GetCachedSongs_ShouldReturnEmptyList_IfExtensionIsNotSupported(){
+			string[] testSongPaths = ["test_path/song1.mp3", "test_path/song2.mp4"];
+
+			_fileServiceMock.Setup(fs => fs.GetFiles()).Returns(testSongPaths);
+
+			List<Song> songs = _cacheService.GetCachedSongs();
+
+			Assert.Empty(songs);
 		}
 
 		// -----------------------------------------------------

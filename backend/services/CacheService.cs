@@ -27,6 +27,7 @@ namespace backend.services
 			return songs;
 		}
 
+		// INFO: this is left public for testing purposes
 		public Song ReturnSong(string filePath)
 		{
 			Track track = new(filePath);
