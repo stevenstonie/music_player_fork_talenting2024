@@ -11,9 +11,17 @@ export class Utils {
 	}
 
 	static getDurationStringFromSeconds(seconds: number): string {
+		if (seconds < 60 && seconds >= 0) {
+			return `${seconds}s`;
+		}
+		if (seconds < 0) {
+			return '0s';
+		}
+
 		const h = Math.floor(seconds / 3600);
 		const min = Math.floor((seconds % 3600) / 60);
 		const s = seconds % 60;
+
 		return `${h ? `${h}h ` : ''}${min}m ${s}s`;
 	}
 }
