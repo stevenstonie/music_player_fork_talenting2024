@@ -3,8 +3,8 @@ using backend.services.interfaces;
 
 namespace backend.services
 {
-	public class AlbumService (ICacheService cacheService) : IAlbumService
-	{	
+	public class AlbumService(ICacheService cacheService) : IAlbumService
+	{
 		private readonly ICacheService _cacheService = cacheService;
 
 		public IEnumerable<Song> GetAlbumSongs(string albumName)

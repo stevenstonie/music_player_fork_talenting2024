@@ -24,7 +24,11 @@ namespace backend.Tests.services
 		[Theory]
 		[InlineData("Album 1")]
 		[InlineData("Album 2")]
+<<<<<<< Updated upstream
 		public void GetAlbumSongs_ShouldReturnAllSongsByAlbum(string albumName)
+=======
+		public void GetAlbumSongs_ShouldReturnAllSongsOfAlbum(string albumName)
+>>>>>>> Stashed changes
 		{
 			IEnumerable<Song> songs = _albumService.GetAlbumSongs(albumName);
 
@@ -37,6 +41,18 @@ namespace backend.Tests.services
 			_cacheServiceMock.Verify(cacheService => cacheService.GetCachedSongs(), Times.Exactly(1));
 		}
 
+<<<<<<< Updated upstream
+=======
+		[Fact]
+		public void GetAlbumSongs_ShouldReturnEmptyList_IfAlbumDoesNotExist()
+		{
+			IEnumerable<Song> songs = _albumService.GetAlbumSongs("Album 3");
+
+			Assert.Empty(songs);
+			_cacheServiceMock.Verify(cacheService => cacheService.GetCachedSongs(), Times.Exactly(1));
+		}
+
+>>>>>>> Stashed changes
 		// ------------------------------------------------------------------------
 
 		private static List<Song> ReturnTestSongs()

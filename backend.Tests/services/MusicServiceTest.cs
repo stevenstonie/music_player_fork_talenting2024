@@ -29,7 +29,6 @@ namespace backend.Tests.services
 				Path = _testPath,
 				Extension = _testExtension
 			});
-			_cacheServiceMock.Setup(cacheService => cacheService.GetCachedSongs()).Returns(ReturnTestSongs());
 
 			_musicService = new(_fileServiceMock.Object, _cacheServiceMock.Object, _musicConfigMock.Object);
 		}
@@ -37,6 +36,8 @@ namespace backend.Tests.services
 		[Fact]
 		public void GetSongs_ShouldReturnAllSongs()
 		{
+			_cacheServiceMock.Setup(cacheService => cacheService.GetCachedSongs()).Returns(ReturnTestSongs());
+			
 			IEnumerable<Song> songs = _musicService.GetSongs();
 
 			Assert.NotNull(songs);
@@ -53,20 +54,22 @@ namespace backend.Tests.services
 			Assert.Empty(songs);
 		}
 
-		[Fact]
+		[Fact] // FIXME: test doesnt catch the custom exception when debugging it
 		public void StreamSong_ShouldThrowException_WhenFileNotFound()
 		{
-			_fileServiceMock.Setup(fileService => fileService.GetPath(It.IsAny<string>())).Throws(new ResourceNotFoundCustomException("Message to indicate that the file was not found."));
+			_fileServiceMock.Setup(fileService => fileService.GetPath(It.IsAny<string>())).Returns("random path to an absent file.");
+			_fileServiceMock.Setup(fileService => fileService.Exists(It.IsAny<string>())).Returns(false);
 
-			Assert.Throws<ResourceNotFoundCustomException>(() => _musicService.StreamSong("random path to an absent file."));
+			Assert.Throws<ResourceNotFoundCustomException>(() => _musicService.StreamSong("random song.mp3"));
 		}
 
-		[Fact]
-		public void StreamSong_ShouldThrowException_WhenFileIsNotSupported(){
+		[Fact]	// FIXME: same here
+		public void StreamSong_ShouldThrowException_WhenExtensionIsNotSupported()
+		{
 			_fileServiceMock.Setup(fileService => fileService.Exists(It.IsAny<string>())).Returns(true);
-			_fileServiceMock.Setup(fileService => fileService.IsExtensionSupported(It.IsAny<string>())).Throws(new ExtensionNotSupportedCustomException("Message say something something a file is not supported."));
+			_fileServiceMock.Setup(fileService => fileService.IsExtensionSupported(It.IsAny<string>())).Returns(false);
 
-			Assert.Throws<ExtensionNotSupportedCustomException>(() => _musicService.StreamSong("message to indicate that the file is not supported."));
+			Assert.Throws<ExtensionNotSupportedCustomException>(() => _musicService.StreamSong("shine on you crazy diamond p1.mp3"));
 		}
 		// ---------------------------------------------------------------
 
