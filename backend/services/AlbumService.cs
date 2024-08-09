@@ -9,6 +9,7 @@ namespace backend.services
 
 		public IEnumerable<Song> GetAlbumSongs(string albumName)
 		{
+
 			return _cacheService.GetCachedSongs().Where(song => song.Album != null && song.Album.Equals(albumName, StringComparison.OrdinalIgnoreCase));
 		}
 

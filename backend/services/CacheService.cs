@@ -37,10 +37,14 @@ namespace backend.services
 
 			return new Song
 			{
-				FileName = filePath,
-				Artist = track.Artist,
-				Album = track.Album,
-				Rating = rating
+				FileName = fileInfo.Name,
+				Title = track.Title,
+				CreationDate = fileInfo.CreationTime,
+				Album = !string.IsNullOrEmpty(track.Album) ? track.Album : null,
+				Rating = rating,
+				Artist = !string.IsNullOrEmpty(track.Artist) ? track.Artist : null,
+				Duration = track.Duration,
+				ImageData = imageBinary?.PictureData
 			};
 		}
 	}
