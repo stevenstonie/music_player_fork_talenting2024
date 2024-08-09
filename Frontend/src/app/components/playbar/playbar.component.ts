@@ -47,7 +47,7 @@ export class PlaybarComponent implements OnInit {
       });
     }
 
-    this.musicService.loadSongs();
+    this.musicService.getAndLoadSongs();
 
     this.musicService.currentSong$.subscribe((song) => {
       if (song) {

@@ -18,7 +18,7 @@ export class DashboardPageComponent {
   constructor(private musicService: MusicService) {}
 
   ngOnInit(): void {
-    this.musicService.loadSongs();
+    this.musicService.getAndLoadSongs();
     this.musicService.getMusicFiles().subscribe((songs) => {
       this.filteredSongs = songs;
     });

@@ -45,15 +45,20 @@ export class MusicService {
     }
   }
 
-  loadSongs(): void {
-    this.getMusicFiles().subscribe({
-      next: (songs: Song[]) => {
-        this.songs = songs;
-      },
-      error: (error) => {
-        console.error('Error loading songs:', error);
-      },
-    });
+  getAndLoadSongs(): void {
+    this.getSongs().subscribe((songs) =>
+      this.songs = songs
+    );
+  }
+  // still not really testable ^^
+
+  getSongs(): Observable<Song[]> {
+    return this.getMusicFiles().pipe(
+      catchError((err) => {
+        console.error('Error fetching songs:', err);
+        return throwError(() => new Error(err.message));
+      })
+    )
   }
 
   searchSongs(title: string): Song[] {
