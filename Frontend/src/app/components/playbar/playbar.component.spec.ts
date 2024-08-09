@@ -5,7 +5,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 describe('PlaybarComponent', () => {
   let fixture: ComponentFixture<PlaybarComponent>;
-  let app: PlaybarComponent;
+  let component: PlaybarComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -19,15 +19,15 @@ describe('PlaybarComponent', () => {
     }).compileComponents();
     
     fixture = TestBed.createComponent(PlaybarComponent);
-    app = fixture.debugElement.componentInstance;
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
   })
 
   it('should create the component', () => {
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should render the component', () => {
-    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled).toBeTruthy();
   });

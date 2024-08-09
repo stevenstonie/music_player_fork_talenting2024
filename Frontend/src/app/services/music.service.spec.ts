@@ -24,7 +24,7 @@ describe("MusicService", () => {
         service.getAndLoadSongs();
     })
 
-    it("should be created", () => {
+    it("should create the service", () => {
         expect(service).toBeTruthy();
     });
 
@@ -63,6 +63,45 @@ describe("MusicService", () => {
         service.setNextSong();
 
         expect(service.currentSongIndex).toEqual(1);
+    })
+
+    it('should set previous song', () => {
+        service.setCurrentSong(hardCodedSongs[1]);
+
+        service.setPreviousSong();
+
+        expect(service.currentSongIndex).toEqual(0);
+    })
+
+    it('should set next song to the first one if it was the last song initially', () => {
+        service.setCurrentSong(hardCodedSongs[1]);
+
+        service.setNextSong();
+
+        expect(service.currentSongIndex).toEqual(0);
+    })
+
+    it('should set previous song to the last on if it was the first song initially', () => {
+        service.setCurrentSong(hardCodedSongs[0]);
+
+        service.setPreviousSong();
+
+        expect(service.currentSongIndex).toEqual(1);
+    })
+
+    it('should NOT set current song if it is not in the list (is set to default value)', () => {
+        const randomUnexistentSong: Song = {
+            title: 'random unexistent song',
+            fileName: "",
+            creationDate: new Date(),
+            isLiked: false,
+            rating: 0,
+            duration: 0
+        };
+
+        service.setCurrentSong(randomUnexistentSong);
+
+        expect(service.currentSongIndex).toEqual(0);
     })
 })
 
