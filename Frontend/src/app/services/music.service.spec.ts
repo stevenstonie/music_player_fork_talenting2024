@@ -7,6 +7,7 @@ import { Song } from "../models/song";
 
 describe("MusicService", () => {
     let service: MusicService;
+    const hardCodedSongs: Song[] = returnHardCodedSongs();
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
@@ -17,6 +18,10 @@ describe("MusicService", () => {
         }).compileComponents();
 
         service = new MusicService(TestBed.inject(HttpClient));
+
+        // mock the 'getMusicFiles()' API call to return the hardcoded songs
+        spyOn(service, 'getMusicFiles').and.returnValue(of(hardCodedSongs));
+        service.getAndLoadSongs();
     })
 
     it("should be created", () => {
@@ -24,24 +29,47 @@ describe("MusicService", () => {
     });
 
     it('should load songs from API', async () => {
-        // Arrange
-        const hardCodedSongs: Song[] = returnHardCodedSongs();
-
-        // mock the 'getMusicFiles()' API call to return the hardcoded songs
-        spyOn(service, 'getMusicFiles').and.returnValue(of(hardCodedSongs));
-
         // Act
         const songs = await lastValueFrom(service.getSongs());
 
         // Assert
         expect(songs).toEqual(hardCodedSongs);
     });
+
+    it('should return songs by searching', () => {
+        const songs = service.searchSongs('Song');
+
+        expect(songs).toEqual(hardCodedSongs);
+    });
+
+    it('should return empty array if no songs are found', () => {
+        jasmine.getEnv().allowRespy(true);  // workaround to let the next mock not get an error of "method already spied upon"
+        spyOn(service, 'getMusicFiles').and.returnValue(of([]));
+        service.getAndLoadSongs();
+
+        const songs = service.searchSongs('Song');
+
+        expect(songs).toEqual([]);
+    });
+
+    it('should set current song', () => {
+        service.setCurrentSong(hardCodedSongs[0]);
+        expect(service.currentSongIndex).toEqual(0);
+    })
+
+    it('should set next song', () => {
+        service.setCurrentSong(hardCodedSongs[0]);
+
+        service.setNextSong();
+
+        expect(service.currentSongIndex).toEqual(1);
+    })
 })
 
 function returnHardCodedSongs(): Song[] {
     return [
         {
-            title: 'Song 1',
+            title: 'test song 1',
             fileName: "",
             creationDate: new Date(),
             isLiked: false,
@@ -49,7 +77,7 @@ function returnHardCodedSongs(): Song[] {
             duration: 0
         },
         {
-            title: 'Song 2',
+            title: 'test song 2',
             fileName: "",
             creationDate: new Date(),
             isLiked: false,
