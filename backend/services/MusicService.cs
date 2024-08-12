@@ -7,11 +7,10 @@ using Microsoft.Extensions.Options;
 
 namespace backend.services
 {
-	public class MusicService(IFileService fileService, ICacheService cacheService, IOptions<MusicConfig> musicConfig) : IMusicService
+	public class MusicService(IFileService fileService, ICacheService cacheService) : IMusicService
 	{
 		private readonly IFileService _fileService = fileService;
 		private readonly ICacheService _cacheService = cacheService;
-		private readonly string _extension = musicConfig.Value.Extension;
 
 		public IEnumerable<Song> GetSongs()
 		{
@@ -34,7 +33,7 @@ namespace backend.services
 
 			FileStream stream = new(songPath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
 
-			return new FileStreamResult(stream, $"audio/{_extension}")
+			return new FileStreamResult(stream, $"audio/{_fileService.GetSupportedExtension()}")
 			{
 				EnableRangeProcessing = true
 			};

@@ -10,5 +10,7 @@ namespace backend.services.interfaces
 		bool IsExtensionSupported(string extension);
 
 		FileStream GetFileStream(string fileName);
+
+		string GetSupportedExtension();
 	}
 }

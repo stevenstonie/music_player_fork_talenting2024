@@ -37,5 +37,9 @@ namespace backend.services
 		{
 			return new FileStream(GetPath(fileName), FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync: true);
 		}
+
+		public string GetSupportedExtension(){
+			return _extension;
+		}
 	}
 }
