@@ -65,7 +65,7 @@ export class SongCardComponent {
   }
 
   handleImageError(song: Song): void {
-    song.imageUrl = Utils.handleImageError(song.imageUrl!);
+    song.imageUrl = Utils.handleImageError();
   }
 
   openDialog(message: string): void {

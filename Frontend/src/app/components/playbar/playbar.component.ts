@@ -120,6 +120,6 @@ export class PlaybarComponent implements OnInit {
 
   handleImageError(song: Song): void {
     console.log('handleImageError: ', song);
-    song.imageUrl = Utils.handleImageError(song.imageUrl!);
+    song.imageUrl = Utils.handleImageError();
   }
 }

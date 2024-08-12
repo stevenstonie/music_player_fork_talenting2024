@@ -1,4 +1,3 @@
-import { SafeUrl } from "@angular/platform-browser";
 import { DEFAULT_SONG_IMAGE_PATH } from "../../app.config";
 
 export class Utils {
@@ -6,7 +5,7 @@ export class Utils {
 		return base64Image ? `data:image/jpeg;base64,${base64Image}` : defaultImagePath;
 	}
 
-	static handleImageError(imageUrl: SafeUrl | null): string {
+	static handleImageError(): string {
 		return Utils.getImageUrlOrDefault(null, DEFAULT_SONG_IMAGE_PATH);
 	}
 

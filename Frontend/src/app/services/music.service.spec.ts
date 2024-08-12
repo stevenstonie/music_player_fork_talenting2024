@@ -29,21 +29,19 @@ describe("MusicService", () => {
     });
 
     it('should load songs from API', async () => {
-        // Act
         const songs = await lastValueFrom(service.getSongs());
 
-        // Assert
         expect(songs).toEqual(hardCodedSongs);
     });
 
-    it('should return songs by searching', () => {
-        const songs = service.searchSongs('Song');
+    it('should search for songs and return them', () => {
+        const songs = service.searchSongs('SoNg');
 
         expect(songs).toEqual(hardCodedSongs);
     });
 
-    it('should return empty array if no songs are found', () => {
-        jasmine.getEnv().allowRespy(true);  // workaround to let the next mock not get an error of "method already spied upon"
+    it('should search for songs and return an empty array if none are found', () => {
+        jasmine.getEnv().allowRespy(true);  // workaround to not let the next mock get an error of "method already spied upon"
         spyOn(service, 'getMusicFiles').and.returnValue(of([]));
         service.getAndLoadSongs();
 
