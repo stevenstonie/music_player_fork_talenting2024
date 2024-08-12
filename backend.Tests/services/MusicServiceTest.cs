@@ -30,7 +30,7 @@ namespace backend.Tests.services
 				Extension = _testExtension
 			});
 
-			_musicService = new(_fileServiceMock.Object, _cacheServiceMock.Object, _musicConfigMock.Object);
+			_musicService = new(_fileServiceMock.Object, _cacheServiceMock.Object);
 		}
 
 		[Fact]

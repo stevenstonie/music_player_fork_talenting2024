@@ -14,6 +14,11 @@ namespace backend.services
 			return Path.Combine(_musicPath, fileName);
 		}
 
+		public string GetExtension(string fileName)
+		{
+			return Path.GetExtension(fileName);
+		}
+
 		public string[] GetFiles()
 		{
 			if (!Directory.Exists(_musicPath)) Directory.CreateDirectory(_musicPath);

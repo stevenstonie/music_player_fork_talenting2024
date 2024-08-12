@@ -14,7 +14,7 @@ namespace backend.services
 			string[] files = _fileService.GetFiles();
 			List<Song> songs = [];
 
-			foreach (string file in files.Where(file => Path.GetExtension(file).Equals($"{_fileService.GetSupportedExtension()}", StringComparison.OrdinalIgnoreCase)))
+			foreach (string file in files.Where(file => _fileService.IsExtensionSupported(Path.GetExtension(file))))
 			{
 				Song song = ReturnSong(file);
 

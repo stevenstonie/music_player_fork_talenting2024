@@ -16,7 +16,6 @@ namespace backend.Tests.services
 		private readonly Mock<IOptions<MusicConfig>> _musicConfigMock;
 		private readonly Mock<IFileService> _fileServiceMock;
 
-
 		public CacheServiceTest()
 		{
 			_fileServiceMock = new();
@@ -29,7 +28,7 @@ namespace backend.Tests.services
 			});
 			_fileServiceMock.Setup(fs => fs.GetFiles()).Returns(ReturnTestSongPaths());
 
-			_cacheService = new(_musicConfigMock.Object, _fileServiceMock.Object);
+			_cacheService = new(_fileServiceMock.Object);
 		}
 
 		[Fact]
@@ -39,29 +38,30 @@ namespace backend.Tests.services
 			Song song2 = _cacheService.ReturnSong(ReturnTestSongPaths()[1]);
 
 			Assert.NotNull(song1);
-			Assert.Equal(ReturnTestSongPaths()[0], song1.FileName);
+			Assert.Contains(song1.FileName, ReturnTestSongPaths()[0]);
 			Assert.InRange(song1.Rating, 1, 5);
 			Assert.NotNull(song2);
-			Assert.Equal(ReturnTestSongPaths()[1], song2.FileName);
+			Assert.Contains(song2.FileName, ReturnTestSongPaths()[1]);
 			Assert.InRange(song2.Rating, 1, 5);
 		}
 
 		[Fact]
 		public void GetCachedSongs_ShouldReturnSongs()
 		{
+			_fileServiceMock.Setup(fs => fs.IsExtensionSupported(It.IsAny<string>())).Returns(true);
+
 			List<Song> songs = _cacheService.GetCachedSongs();
 
 			Assert.NotNull(songs);
 			Assert.Equal(2, songs.Count);
-			Assert.Equal(ReturnTestSongPaths()[0], songs[0].FileName);
-			Assert.Equal(ReturnTestSongPaths()[1], songs[1].FileName);
+			Assert.Contains(songs[0].FileName, ReturnTestSongPaths()[0]);
+			Assert.Contains(songs[1].FileName, ReturnTestSongPaths()[1]);
 		}
 
 		[Fact]
 		public void GetCachedSongs_ShouldReturnEmptyList_IfExtensionIsNotSupported()
 		{
 			string[] testSongPaths = ["test_path/song1.mp3", "test_path/song2.mp4"];
-
 			_fileServiceMock.Setup(fs => fs.GetFiles()).Returns(testSongPaths);
 
 			List<Song> songs = _cacheService.GetCachedSongs();

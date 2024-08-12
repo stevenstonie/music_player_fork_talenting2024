@@ -1,13 +1,11 @@
-using backend.config;
 using backend.exceptions;
 using backend.models;
 using backend.services.interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace backend.services
 {
-	public class MusicService(IFileService fileService, ICacheService cacheService) : IMusicService
+    public class MusicService(IFileService fileService, ICacheService cacheService) : IMusicService
 	{
 		private readonly IFileService _fileService = fileService;
 		private readonly ICacheService _cacheService = cacheService;
