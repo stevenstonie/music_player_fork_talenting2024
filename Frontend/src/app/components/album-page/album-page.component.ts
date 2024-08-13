@@ -37,8 +37,8 @@ export class AlbumPageComponent implements OnInit {
     }
   }
 
-  navigateToArtistWindow(artistName: string): void {
-    if (artistName == null) {
+  navigateToArtistWindow(artistName: string | undefined | null): void {
+    if (artistName == null || artistName == undefined || artistName.trim() == '') {
       alert('this song doesnt have an associated artist.');
       return;
     }

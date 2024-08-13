@@ -29,6 +29,7 @@ describe('PlaybarComponent', () => {
 
   it('should render the component', () => {
     const compiled = fixture.nativeElement as HTMLElement;
+    
     expect(compiled).toBeTruthy();
   });
 });
